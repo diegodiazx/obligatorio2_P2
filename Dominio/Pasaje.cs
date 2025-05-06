@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dominio
+{
+    public class Pasaje
+    {
+        private int _id;
+        private static int s_ultimoId = 0;
+        private Vuelo _vuelo;
+        private DateTime _fecha;
+        private TipoEquipaje _equipaje;
+        private double _precio;
+        private Cliente _pasajero; 
+
+        public DateTime Fecha
+        {
+            get
+            {
+                return this._fecha;
+            }
+        }
+
+        public Pasaje(
+            Vuelo vuelo,
+            DateTime fecha,
+            TipoEquipaje equipaje,
+            Cliente pasajero)
+        {
+            this._id = s_ultimoId++;
+            this._vuelo = vuelo;
+            this._fecha = fecha;
+            this._equipaje = equipaje;
+            this._pasajero = pasajero;
+            this.CalcularPrecio();
+        }
+
+        public void Validar()
+        {
+            ValidarFecha();
+        }
+
+        //Todavia no debemos implementar el metodo CalcularPrecio, por eso es 0.
+        public void CalcularPrecio()
+        {
+            this._precio = 0;
+        }
+
+        public void ValidarFecha()
+        {
+            DiasSemana diaEsp = (DiasSemana)this._fecha.DayOfWeek;
+            if (!this._vuelo.Frecuencia.Contains(diaEsp)){
+                throw new Exception("La fecha del pasaje " + this._id + " no corresponde con la frecuencia del vuelo.");
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {this._id}\n" +
+                $"Pasajero: {this._pasajero.Nombre}\n" +
+                $"Precio: {this._precio}\n" +
+                $"Fecha: {this._fecha.ToShortDateString()}\n" +
+                $"Numero de vuelo: {this._vuelo.Numero}\n";
+        }
+
+    }
+}
