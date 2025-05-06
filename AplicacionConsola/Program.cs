@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace AplicacionConsola
 {//agregar metodos solicitar int, solicitar double, etc.
- //Esos mismos hacen validaciones, por eso no estan dentro de un try ctach jiji
+ //Esos mismos hacen validaciones, por eso no estan dentro de un try ctach jiji shvnsrhunvk
 
 //En luagar de tener el equals en Cliente y Admin, lo podemos poner en Usuario y ta, ya que es la misma condicion
 
