@@ -43,16 +43,16 @@ namespace Dominio
 
         public void Validar()
         {
-            this.ValidarCodigo();
+            ValidarCodigo(this._codigo);
             this.ValidarCiudad();
             this.ValidarCostoOp();
             this.ValidarCostoTas();
         }
 
-        public void ValidarCodigo()
+        public static void ValidarCodigo(string codigo)
         {
             bool esMayus = true;
-            foreach(char c in this._codigo)
+            foreach(char c in codigo)
             {
                 if(c < 65 || c > 90) //ASCII : A = 65 , Z = 90
                 {
@@ -61,9 +61,9 @@ namespace Dominio
                 }
 
             }
-            if (this._codigo.Length != 3 || !esMayus )
+            if (codigo.Length != 3 || !esMayus )
             {
-                throw new Exception("El codigo " + this._codigo + " debe ser de 3 letras mayusculas.");
+                throw new Exception("El codigo " + codigo + " debe ser de 3 letras mayusculas.");
             }
         }
 

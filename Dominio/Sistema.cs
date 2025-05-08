@@ -239,7 +239,7 @@ namespace Dominio
 
         public void PrecargaUsuarios()
         {
-            Cliente premium1 = new Premium("juanmail.com", "Obliga1234", "48012345", "Juan Pérez", "Uruguayo");
+            Cliente premium1 = new Premium("juan@mail.com", "Obliga1234", "48012345", "Juan Pérez", "Uruguayo");
             Cliente premium2 = new Premium("ana@mail.com", "ObligaAbcd1", "50345678", "Ana López", "Argentina");
             Cliente premium3 = new Premium("roberto@mail.com", "ObligaPass1", "41234567", "Roberto Díaz", "Chileno");
             Cliente premium4 = new Premium("marce@mail.com", "ObligaQwerty1", "43567890", "Marcela Soto", "Uruguaya");
