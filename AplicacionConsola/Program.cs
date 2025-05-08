@@ -157,7 +157,7 @@ namespace AplicacionConsola
         }
          */
 
-        static void ListarVuelos()
+        static void ListarVuelos() //validar el codigo IATA y mostrar el mensaje correspondiente
         {
             try
             {
