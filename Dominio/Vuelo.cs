@@ -113,5 +113,12 @@ namespace Dominio
             };
             return resultado + "\n";
         }
+        
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Vuelo)) return false;
+            Vuelo nuevo = (Vuelo)obj;
+            return (this._numero.Equals(nuevo._numero));
+        }
     }
 }

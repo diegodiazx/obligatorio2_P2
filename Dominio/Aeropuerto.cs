@@ -89,5 +89,12 @@ namespace Dominio
                 throw new Exception("El costo de tasas no puede ser negativo.");
             }
         }
+        
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Aeropuerto)) return false;
+            Aeropuerto nuevo = (Aeropuerto)obj;
+            return (this._codigo.Equals(nuevo._codigo));
+        }
     }
 }

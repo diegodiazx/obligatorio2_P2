@@ -29,7 +29,7 @@ namespace Dominio
             }
         }
 
-        public Sistema()
+        private Sistema()
         {
             this._usuarios = new List<Usuario>();
             this._vuelos = new List<Vuelo>();
@@ -129,9 +129,42 @@ namespace Dominio
         {
             foreach (Avion avion in this._aviones)
             {
-                if (usuario.Equals(otro))
+                if (avion.Equals(otro))
                 {
-                    throw new Exception("Ya existe un usuario con ese correo.");
+                    throw new Exception("Ya existe ese modelo de avion.");
+                }
+            }
+        }
+        
+        public void ExisteVuelo(Vuelo otro)
+        {
+            foreach (Vuelo vuelo in this._vuelos)
+            {
+                if (vuelo.Equals(otro))
+                {
+                    throw new Exception("Ya existe un vuelo con ese codigo.");
+                }
+            }
+        }
+        
+        public void ExisteAeropuerto(Aeropuerto otro)
+        {
+            foreach (Aeropuerto aeropuerto in this._aeropuertos)
+            {
+                if (aeropuerto.Equals(otro))
+                {
+                    throw new Exception("Ya existe un aeropuerto con ese codigo.");
+                }
+            }
+        }
+        
+        public void ExisteRuta(Ruta otro)
+        {
+            foreach (Ruta ruta in this._rutas)
+            {
+                if (ruta.Equals(otro))
+                {
+                    throw new Exception("Ya existe una ruta con ese recorrido (Aeropuertos de salida y llegada).");
                 }
             }
         }
@@ -172,68 +205,41 @@ namespace Dominio
 
         public void AgregarAvion(Avion avion)
         {
-
+            ExisteAvion(avion);
             avion.Validar();
             this._aviones.Add(avion);
-           
-
         }
 
         public void AgregarVuelo(Vuelo vuelo)
         {
-            try
-            {
-                vuelo.Validar();
-                this._vuelos.Add(vuelo);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            ExisteVuelo(vuelo);
+            vuelo.Validar();
+            this._vuelos.Add(vuelo);
         }
 
         public void AgregarAeropuerto(Aeropuerto aeropuerto)
         {
-            try
-            {
-                aeropuerto.Validar();
-                this._aeropuertos.Add(aeropuerto);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            ExisteAeropuerto(aeropuerto);
+            aeropuerto.Validar();
+            this._aeropuertos.Add(aeropuerto);
         }
 
         public void AgregarRuta(Ruta ruta)
         {
-            try
-            {
-                ruta.Validar();
-                this._rutas.Add(ruta);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            ExisteRuta(ruta);
+            ruta.Validar();
+            this._rutas.Add(ruta);
         }
 
         public void AgregarPasaje(Pasaje pasaje)
         {
-            try
-            {
-                pasaje.Validar();
-                this._pasajes.Add(pasaje);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            pasaje.Validar();
+            this._pasajes.Add(pasaje);
         }
 
         public void PrecargaUsuarios()
         {
-            Cliente premium1 = new Premium("juan@mail.com", "Obliga1234", "48012345", "Juan Pérez", "Uruguayo");
+            Cliente premium1 = new Premium("juanmail.com", "Obliga1234", "48012345", "Juan Pérez", "Uruguayo");
             Cliente premium2 = new Premium("ana@mail.com", "ObligaAbcd1", "50345678", "Ana López", "Argentina");
             Cliente premium3 = new Premium("roberto@mail.com", "ObligaPass1", "41234567", "Roberto Díaz", "Chileno");
             Cliente premium4 = new Premium("marce@mail.com", "ObligaQwerty1", "43567890", "Marcela Soto", "Uruguaya");

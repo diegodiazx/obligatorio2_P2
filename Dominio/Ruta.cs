@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,6 +67,13 @@ namespace Dominio
         public double CostoOperacionAeropuertos()
         {
             return this._aeroSalida.CostoOperacion + this._aeroLlegada.CostoOperacion;
+        }
+        
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Ruta)) return false;
+            Ruta nuevo = (Ruta)obj;
+            return (this._aeroSalida.Equals(nuevo._aeroSalida) && (this._aeroLlegada.Equals(nuevo._aeroLlegada)));
         }
 
     }

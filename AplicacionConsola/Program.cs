@@ -17,18 +17,19 @@ namespace AplicacionConsola
 
     internal class Program
     {
-        private static Sistema s = Sistema.Instancia;
+        private static Sistema s;
 
         static void Main(string[] args)
         {
-            try //Por que no muestra el mensaje correcto? Solo muestra uno generico
+            try
             {
-                Sistema sistema = s;
-            }catch (Exception e)
+                Sistema sistema = Sistema.Instancia;
+                s = sistema;
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
             Console.WriteLine("Bienvenidos a nuestra Aerolinea!");
 
             int seleccion = -1;
@@ -180,7 +181,7 @@ namespace AplicacionConsola
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.InnerException.Message);
             }
         }
 

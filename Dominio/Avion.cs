@@ -109,6 +109,13 @@ namespace Dominio
                 throw new Exception("El costo por km no puede ser negativo.");
             }
         }
+        
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Avion)) return false;
+            Avion nuevo = (Avion)obj;
+            return (this._modelo.Equals(nuevo._modelo));
+        }
     }
 
 
