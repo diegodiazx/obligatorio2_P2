@@ -48,7 +48,7 @@ namespace Dominio
             this._ruta = ruta;
             this._avion = avion;
             this._frecuencia = diasSem;
-            this.CostoPorAsiento();
+            CostoPorAsiento();
         } 
 
         public void Validar()

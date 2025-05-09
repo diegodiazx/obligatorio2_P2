@@ -45,8 +45,8 @@ namespace Dominio
         {
             ValidarCodigo(this._codigo);
             ValidarCiudad();
-            ValidarCostoOp();
-            ValidarCostoTas();
+            ValidarCostoOperacion();
+            ValidarCostoTasa();
         }
 
         public static void ValidarCodigo(string codigo)
@@ -75,14 +75,14 @@ namespace Dominio
             }
         }
 
-        private void ValidarCostoOp()
+        private void ValidarCostoOperacion()
         {
             if(this._costoOperacion < 0)
             {
                 throw new Exception("El costo de operacion no puede ser negativo.");
             }
         }
-        private void ValidarCostoTas()
+        private void ValidarCostoTasa()
         {
             if (this._costoTasas < 0)
             {
