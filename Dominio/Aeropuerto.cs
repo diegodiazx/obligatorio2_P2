@@ -35,18 +35,18 @@ namespace Dominio
             double costoOperacion,
             double costoTasas)
         {
-            _codigo = codigo;
-            _ciudad = ciudad;
-            _costoOperacion = costoOperacion;
-            _costoTasas = costoTasas;
+            this._codigo = codigo;
+            this._ciudad = ciudad;
+            this._costoOperacion = costoOperacion;
+            this._costoTasas = costoTasas;
         }
 
         public void Validar()
         {
             ValidarCodigo(this._codigo);
-            this.ValidarCiudad();
-            this.ValidarCostoOp();
-            this.ValidarCostoTas();
+            ValidarCiudad();
+            ValidarCostoOp();
+            ValidarCostoTas();
         }
 
         public static void ValidarCodigo(string codigo)
@@ -63,11 +63,11 @@ namespace Dominio
             }
             if (codigo.Length != 3 || !esMayus )
             {
-                throw new Exception("El codigo " + codigo + " debe ser de 3 letras mayusculas.");
+                throw new Exception("El codigo ingresado debe ser de 3 letras mayusculas.");
             }
         }
 
-        public void ValidarCiudad()
+        private void ValidarCiudad()
         {
             if (string.IsNullOrEmpty(this._ciudad))
             {
@@ -75,14 +75,14 @@ namespace Dominio
             }
         }
 
-        public void ValidarCostoOp()
+        private void ValidarCostoOp()
         {
             if(this._costoOperacion < 0)
             {
                 throw new Exception("El costo de operacion no puede ser negativo.");
             }
         }
-        public void ValidarCostoTas()
+        private void ValidarCostoTas()
         {
             if (this._costoTasas < 0)
             {

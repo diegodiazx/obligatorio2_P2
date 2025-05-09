@@ -5,16 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 
 namespace AplicacionConsola
-{//agregar metodos solicitar int, solicitar double, etc.
- //Esos mismos hacen validaciones, por eso no estan dentro de un try ctach jiji4
-
-//En luagar de tener el equals en Cliente y Admin, lo podemos poner en Usuario y ta, ya que es la misma condicion
-
-//Para la documentacion no copiamos y pegamos la parte de aplicacion de consola. Solo el codigo de lo otro
-//Pedirle a chat GPT una TABLA de los datos precargados
-//Si le hicimos cambios a lo que chat GPT nos dio, decir cuales cambios hicimos
-
-
+{
     internal class Program
     {
         private static Sistema s;
@@ -102,7 +93,10 @@ namespace AplicacionConsola
             try
             {
                 Cliente clienteOc = new Ocasional(correo, contra, doc, nom, nac);
+                clienteOc.Validar();
 
+                //En s.AgregarUsuario(clienteOc) se van a volver a validar los datos, lo cual es redundante pero es necesario tener la validacion
+                //en el metodo para que se validen los datos al momento de la precarga.
                 s.AgregarUsuario(clienteOc);
 
                 Console.WriteLine("Cliente nuevo dado de alta: \n" + clienteOc);

@@ -25,7 +25,7 @@ namespace Dominio
             ValidarCorreo();
         }
 
-        public void ValidarCorreo()
+        private void ValidarCorreo()
         {
             if (this._correo.Contains(" ") || !(this._correo.Contains("@")))
             {
@@ -33,7 +33,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarContra()
+        private void ValidarContra()
         {
             bool hayMayus = false;
             bool hayMin = false;

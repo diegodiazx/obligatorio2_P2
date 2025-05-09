@@ -35,7 +35,7 @@ namespace Dominio
             this._fecha = fecha;
             this._equipaje = equipaje;
             this._pasajero = pasajero;
-            this.CalcularPrecio();
+            CalcularPrecio();
         }
 
         public void Validar()
@@ -49,8 +49,9 @@ namespace Dominio
             this._precio = 0;
         }
 
-        public void ValidarFecha()
+        private void ValidarFecha()
         {
+            //Casteamos de DayOfWeek a nuestro enum DiasSemana para obtener el day of week en español
             DiasSemana diaEsp = (DiasSemana)this._fecha.DayOfWeek;
             if (!this._vuelo.Frecuencia.Contains(diaEsp)){
                 throw new Exception("La fecha del pasaje " + this._id + " no corresponde con la frecuencia del vuelo.");

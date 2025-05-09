@@ -63,14 +63,14 @@ namespace Dominio
 
         public void Validar()
         {
-            this.ValidarFabricante();
-            this.ValidarModelo();
-            this.ValidarAsiento();
-            this.ValidarAlcance();
-            this.ValidarCostoKm();
+            ValidarFabricante();
+            ValidarModelo();
+            ValidarAsiento();
+            ValidarAlcance();
+            ValidarCostoKm();
         }
 
-        public void ValidarFabricante()
+        private void ValidarFabricante()
         {
             if(string.IsNullOrEmpty(this._fabricante))
             {
@@ -78,7 +78,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarModelo()
+        private void ValidarModelo()
         {
             if(string.IsNullOrEmpty(this._modelo))
             {
@@ -86,7 +86,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarAsiento(){
+        private void ValidarAsiento(){
             
             if(this._cantAsientos < 0)
             {
@@ -94,7 +94,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarAlcance()
+        private void ValidarAlcance()
         {
             if (this._alcance < 0)
             {
@@ -102,7 +102,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarCostoKm()
+        private void ValidarCostoKm()
         {
             if (this._costoPorKm < 0)
             {

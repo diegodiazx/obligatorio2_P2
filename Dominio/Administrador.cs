@@ -20,13 +20,13 @@ namespace Dominio
 
         public void Validar()
         {
-            this.ValidarUsuario();
-            this.ValidarApodo();
+            ValidarUsuario();
+            ValidarApodo();
         }
 
-        public void ValidarApodo()
+        private void ValidarApodo()
         {
-            if(this._apodo == "")
+            if(string.IsNullOrEmpty(this._apodo))
             {
                 throw new Exception("El apodo no puede ser vacio.");
             }

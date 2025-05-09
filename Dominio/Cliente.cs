@@ -35,13 +35,13 @@ namespace Dominio
 
         public void Validar()
         {
-            this.ValidarUsuario();
-            this.ValidarDoc();
-            this.ValidarNombre();
-            this.ValidarNac();
+            ValidarUsuario();
+            ValidarDocumento();
+            ValidarNombre();
+            ValidarNacionalidad();
         }
 
-        public void ValidarDoc()
+        private void ValidarDocumento()
         {
             bool noEsNumero = false;
 
@@ -60,7 +60,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarNombre()
+        private void ValidarNombre()
         {
             if(string.IsNullOrEmpty(this._nombre))
             {
@@ -68,7 +68,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarNac()
+        private void ValidarNacionalidad()
         {
             bool condicion = false;
             foreach (char caracter in this._nacionalidad)
@@ -91,20 +91,6 @@ namespace Dominio
                 base.ToString() +
                 $"Nacionalidad: {this._nacionalidad}\n";
         }
-        /*
-        
-        public override string ToString()
-        {
-            string mostrar = $"Nombre: {this._nombre}\n" +
-                base.ToString() +
-                $"Nacionalidad: {this._nacionalidad}\n";
-
-            foreach(Pasaje p in this._pasajes)
-            {
-                mostrar += p.ToString() + "\n";
-            }
-            return mostrar;
-        }*/
 
     }
 }

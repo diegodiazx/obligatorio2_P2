@@ -37,7 +37,7 @@ namespace Dominio
             this._rutas = new List<Ruta>();
             this._aviones = new List<Avion>();
             this._pasajes = new List<Pasaje>();
-            this.PrecargarDatos();
+            PrecargarDatos();
         }
 
         public void PrecargarDatos()
@@ -237,7 +237,7 @@ namespace Dominio
             this._pasajes.Add(pasaje);
         }
 
-        public void PrecargaUsuarios()
+        private void PrecargaUsuarios()
         {
             Cliente premium1 = new Premium("juan@mail.com", "Obliga1234", "48012345", "Juan Pérez", "Uruguayo");
             Cliente premium2 = new Premium("ana@mail.com", "ObligaAbcd1", "50345678", "Ana López", "Argentina");
@@ -272,7 +272,7 @@ namespace Dominio
 
         }
 
-        public void PrecargaAvion()
+        private void PrecargaAvion()
         {
             Avion avion1 = new Avion("Boeing", "737", 180, 5600, 12.5);
             Avion avion2 = new Avion("Airbus", "A320", 160, 6100, 11.8);
@@ -285,7 +285,7 @@ namespace Dominio
             AgregarAvion(avion4);
         }
 
-        public void PrecargaAeropuerto()
+        private void PrecargaAeropuerto()
         {
             Aeropuerto aeropuerto1 = new Aeropuerto("MVD", "Montevideo", 3000, 150);
             Aeropuerto aeropuerto2 = new Aeropuerto("EZE", "Buenos Aires", 2800, 140);
@@ -330,7 +330,7 @@ namespace Dominio
             AgregarAeropuerto(aeropuerto20);
         }
 
-        public void PrecargaRutas()
+        private void PrecargaRutas()
         {
             Ruta ruta1 = new Ruta(_aeropuertos[0], _aeropuertos[1], 1000);
             Ruta ruta2 = new Ruta(_aeropuertos[2], _aeropuertos[3], 8200);
@@ -396,7 +396,7 @@ namespace Dominio
 
         }
 
-        public void PrecargaVuelos()
+        private void PrecargaVuelos()
         {
             Vuelo vuelo1 = new Vuelo("AA101", _rutas[0], _aviones[3], new List<DiasSemana> { DiasSemana.LUNES, DiasSemana.MIERCOLES, DiasSemana.VIERNES });
             Vuelo vuelo2 = new Vuelo("AA102", _rutas[1], _aviones[3], new List<DiasSemana> { DiasSemana.MARTES, DiasSemana.JUEVES });
@@ -467,8 +467,10 @@ namespace Dominio
             AgregarVuelo(vuelo30);
 
         }
-        public void PrecargaPasajes()  //esta bien???
+        private void PrecargaPasajes() 
         {
+            //Recorremos la lista de Usuarios y nos guardamos a loc Clientes ya que estos son los que necesitamos
+            //para crear los pasajes.
             List<Cliente> _clientes = new List<Cliente>();
             foreach(Usuario usuario in _usuarios)
             {

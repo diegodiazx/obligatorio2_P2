@@ -14,8 +14,6 @@ namespace Dominio
         private List<DiasSemana> _frecuencia;
         private double _costoPorAsiento;
 
-        //lista de day of week en luagar de un enum
-
         public string Numero
         {
             get
@@ -68,7 +66,7 @@ namespace Dominio
             this._costoPorAsiento = (costoKm*distancia+costoOperacion)/cantAsientos;
         }
        
-        public void ValidarNumero()
+        private void ValidarNumero()
         {
             if (this._numero.Length >= 3 && this._numero.Length <= 6 && 
                 char.IsLetter(this._numero[0]) && char.IsLetter(this._numero[1]))
@@ -77,7 +75,7 @@ namespace Dominio
                 {
                     if (!(char.IsDigit(this._numero[i])))
                     {
-                        throw new Exception("Los ultimos digitos deben ser numeros.");
+                        throw new Exception("Los ultimos caracteres deben ser numeros.");
                     }
                 }
             } else
@@ -87,7 +85,7 @@ namespace Dominio
             }
         }
 
-        public void ValidarDistanciaMenor()
+        private void ValidarDistanciaMenor()
         {
             if(this._ruta.Distancia > this._avion.Alcance)
             {

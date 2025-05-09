@@ -56,7 +56,7 @@ namespace Dominio
             ValidarDistancia();
         }
 
-        public void ValidarDistancia()
+        private void ValidarDistancia()
         {
             if (this._distancia < 0)
             {
