@@ -183,29 +183,5 @@ namespace AplicacionConsola
             }
             return retorno;
         }
-
-        /*
-        static string SolicitarCodigoIATA(string mensaje)
-        {
-            bool esCorrecto = false;
-            string retorno = "";
-            while (!esCorrecto)
-            {
-                    Console.WriteLine(mensaje);
-                    retorno = Console.ReadLine();
-                    if (retorno == retorno.ToUpper() && retorno.Length == 3)
-                    {
-                        esCorrecto = true;
-
-                    }
-                    else
-                    {
-                        throw new Exception("Codigo incorrecto. Utilice formato IATA");
-                    }
-                
-            }
-            return retorno;
-        }
-        */
     }
 }
