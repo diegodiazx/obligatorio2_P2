@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Aeropuerto
+    public class Aeropuerto : IValidable
     {
         private string _codigo;
         private string _ciudad;

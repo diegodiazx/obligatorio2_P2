@@ -4,10 +4,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Avion
+    public class Avion : IValidable
     {
         private string _fabricante;
         private string _modelo;

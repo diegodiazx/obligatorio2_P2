@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Pasaje
+    public class Pasaje : IValidable
     {
         private int _id;
         private static int s_ultimoId = 0;

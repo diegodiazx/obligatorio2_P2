@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Vuelo
+    public class Vuelo : IValidable
     {
         private string _numero;
         private Ruta _ruta;

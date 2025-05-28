@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public abstract class Usuario
+    public abstract class Usuario : IValidable
     {
         protected string _correo;
         protected string _contra; 
@@ -19,7 +20,7 @@ namespace Dominio
             this._contra = contra;
         }
 
-        public void ValidarUsuario()
+        public void Validar()
         {
             ValidarContra();
             ValidarCorreo();

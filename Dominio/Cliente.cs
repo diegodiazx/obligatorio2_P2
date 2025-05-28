@@ -4,10 +4,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public abstract class Cliente : Usuario
+    public abstract class Cliente : Usuario, IValidable
     {
         protected string _documento;
         protected string _nombre;
@@ -37,7 +38,7 @@ namespace Dominio
 
         public void Validar()
         {
-            ValidarUsuario();
+            base.Validar();
             ValidarDocumento();
             ValidarNombre();
             ValidarNacionalidad();

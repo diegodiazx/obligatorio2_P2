@@ -4,10 +4,11 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Ruta
+    public class Ruta : IValidable
     {
         private int _id;
         private static int s_ultimoId = 0;

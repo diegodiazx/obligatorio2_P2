@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Administrador : Usuario
+    public class Administrador : Usuario, IValidable
     {
         private string _apodo;
 
@@ -20,7 +21,7 @@ namespace Dominio
 
         public void Validar()
         {
-            ValidarUsuario();
+            base.Validar();
             ValidarApodo();
         }
 
