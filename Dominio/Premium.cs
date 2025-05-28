@@ -21,6 +21,16 @@ namespace Dominio
             this._puntos = 0;
         }
 
+        public override double CalcularTarifaEquipaje(TipoEquipaje equipaje)
+        {
+            double tarifa = 0;
+            if (equipaje == TipoEquipaje.BODEGA)
+            {
+                tarifa = 0.05;
+            }
+            return tarifa;
+        }
+
         public override string ToString()
         {
             return base.ToString() +

@@ -33,6 +33,8 @@ namespace Dominio
             this._nacionalidad = nacionalidad;
         }
 
+        public abstract double CalcularTarifaEquipaje(TipoEquipaje equipaje);
+
         public void Validar()
         {
             ValidarUsuario();

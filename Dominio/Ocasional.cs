@@ -32,6 +32,19 @@ namespace Dominio
             AsignarElegibilidad();
         }
 
+        public override double CalcularTarifaEquipaje(TipoEquipaje equipaje)
+        {
+            double tarifa = 0;
+            if (equipaje == TipoEquipaje.CABINA)
+            {
+                tarifa = 0.1;
+            } else if (equipaje == TipoEquipaje.BODEGA)
+            {
+                tarifa = 0.2;
+            }
+            return tarifa;
+        }
+
         public void AsignarElegibilidad()
         {
             Random random = new Random();

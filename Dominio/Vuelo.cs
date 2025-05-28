@@ -12,7 +12,8 @@ namespace Dominio
         private Ruta _ruta;
         private Avion _avion;
         private List<DiasSemana> _frecuencia;
-        private double _costoPorAsiento;
+        private double _costoPorAsiento; 
+        public double CostoPorAsiento { get { return _costoPorAsiento; } }
 
         public string Numero
         {
@@ -48,7 +49,7 @@ namespace Dominio
             this._ruta = ruta;
             this._avion = avion;
             this._frecuencia = diasSem;
-            CostoPorAsiento();
+            CalcularCostoPorAsiento();
         } 
 
         public void Validar()
@@ -57,7 +58,12 @@ namespace Dominio
             ValidarNumero();
         }
 
-        public void CostoPorAsiento()
+        public double TasasAeroportuarias()
+        {
+            return this._ruta.CostoOperacionAeropuertos();
+        }
+
+        public void CalcularCostoPorAsiento()
         {
             double costoKm = this._avion.CostoPorKm;
             double distancia = this._ruta.Distancia;

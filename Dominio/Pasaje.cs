@@ -14,7 +14,8 @@ namespace Dominio
         private DateTime _fecha;
         private TipoEquipaje _equipaje;
         private double _precio;
-        private Cliente _pasajero; 
+        private Cliente _pasajero;
+        private static double s_margenGanancias = 0.25;
 
         public DateTime Fecha
         {
@@ -46,7 +47,8 @@ namespace Dominio
         //Todavia no debemos implementar el metodo CalcularPrecio, por eso es 0.
         public void CalcularPrecio()
         {
-            this._precio = 0;
+            this._precio = this._vuelo.CostoPorAsiento * (1 + s_margenGanancias + this._pasajero.CalcularTarifaEquipaje(this._equipaje)) 
+                           + this._vuelo.TasasAeroportuarias();
         }
 
         private void ValidarFecha()
@@ -62,7 +64,7 @@ namespace Dominio
         {
             return $"Id: {this._id}\n" +
                 $"Pasajero: {this._pasajero.Nombre}\n" +
-                $"Precio: {this._precio}\n" +
+                $"Precio: {this._precio.ToString("0.00")}\n" +
                 $"Fecha: {this._fecha.ToShortDateString()}\n" +
                 $"Numero de vuelo: {this._vuelo.Numero}\n";
         }
