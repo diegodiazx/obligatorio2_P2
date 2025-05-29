@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Comparadores;
 
 namespace Dominio
 {
@@ -18,7 +19,7 @@ namespace Dominio
         private List<Pasaje> _pasajes;
 
         public List<Vuelo> Vuelos { get { return _vuelos; } }
- 
+        public List<Pasaje> Pasajes { get { return _pasajes; } }
         public static Sistema Instancia
         {
             get
@@ -238,6 +239,18 @@ namespace Dominio
             pasaje.Validar();
             this._pasajes.Add(pasaje);
         }
+
+        public List<Pasaje> OrdenarPasajesPorFecha()
+        { List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
+            pasajesOrdenados.Sort();
+            return pasajesOrdenados;
+        }
+        public List<Pasaje> OrdenarPasajesPorPrecio()
+        { List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
+            pasajesOrdenados.Sort(new CompararPasajePorPrecio());
+            return pasajesOrdenados;
+        }
+       
 
         private void PrecargaUsuarios()
         {

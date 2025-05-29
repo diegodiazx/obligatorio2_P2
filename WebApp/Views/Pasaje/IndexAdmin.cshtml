@@ -1,0 +1,31 @@
+@using Dominio
+
+@model List<Pasaje>
+
+<h1>Pasajes</h1>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Vuelo</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Tipo de Equipaje</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Pasajero</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Pasaje pasaje in Model)
+    {
+        <tr>
+            <td>@pasaje.Id</td>
+            <td>@pasaje.Vuelo.Numero</td>
+            <td>@pasaje.Fecha.ToString("dd MMM yyyy")</td>
+            <td>@pasaje.Equipaje</td>
+            <td>$@pasaje.Precio.ToString("0.00")</td>
+            <td>@pasaje.Pasajero.Nombre</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -7,7 +7,7 @@ using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Pasaje : IValidable
+    public class Pasaje : IValidable, IComparable<Pasaje>
     {
         private int _id;
         private static int s_ultimoId = 0;
@@ -17,14 +17,12 @@ namespace Dominio
         private double _precio;
         private Cliente _pasajero;
         private static double s_margenGanancias = 0.25;
-
-        public DateTime Fecha
-        {
-            get
-            {
-                return this._fecha;
-            }
-        }
+        public int Id { get { return _id; } }
+        public Vuelo Vuelo { get { return _vuelo; } }
+        public TipoEquipaje Equipaje { get { return _equipaje; } }
+        public double Precio { get { return _precio; } }
+        public Cliente Pasajero { get { return _pasajero; } }
+        public DateTime Fecha { get { return this._fecha; } }
 
         public Pasaje(
             Vuelo vuelo,
@@ -70,5 +68,10 @@ namespace Dominio
                 $"Numero de vuelo: {this._vuelo.Numero}\n";
         }
 
+        public int CompareTo(Pasaje other)
+        {
+            return (_fecha.CompareTo(other.Fecha));
+        }
+        
     }
 }
