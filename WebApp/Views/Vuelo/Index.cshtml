@@ -1,0 +1,33 @@
+@using Dominio
+
+@model List<Vuelo>
+
+<h2>Vuelos :)</h2>
+
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th scope="col">Numero</th>
+        <th scope="col">Ruta</th>
+        <th scope="col">Avion</th>
+        <th scope="col">Frecuencia</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Vuelo vuelo in Model)
+    {
+        string resultado = "";
+        foreach(DiasSemana dia in vuelo.Frecuencia)
+        {
+            resultado += dia + " ";
+        }
+        <tr>
+            <td>@vuelo.Numero</td>
+            <td>@vuelo.Ruta.ObtenerCodigoSalida() -> @vuelo.Ruta.ObtenerCodigoLlegada() </td>
+            <td>@vuelo.Avion.Modelo</td>
+            <td>@resultado</td>
+        </tr>
+    }
+    </tbody>
+</table>

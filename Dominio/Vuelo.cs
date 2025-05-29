@@ -13,8 +13,23 @@ namespace Dominio
         private Ruta _ruta;
         private Avion _avion;
         private List<DiasSemana> _frecuencia;
-        private double _costoPorAsiento; 
-        public double CostoPorAsiento { get { return _costoPorAsiento; } }
+        private double _costoPorAsiento;
+
+        public Avion Avion
+        {
+            get
+            {
+                return _avion;
+            }
+        }
+
+        public double CostoPorAsiento
+        {
+            get
+            {
+                return _costoPorAsiento;
+            }
+        }
 
         public string Numero
         {
@@ -109,7 +124,7 @@ namespace Dominio
         {
             string resultado = $"Numero: {this._numero}\n" +
                 $"Modelo del avion: {this._avion.Modelo}\n" +
-                $"Ruta: {this._ruta.Salida.Codigo} - {this._ruta.Llegada.Codigo}\n" +
+                $"Ruta: {this._ruta.ObtenerCodigoSalida()} - {this._ruta.ObtenerCodigoLlegada()}\n" +
                 $"Frecuencia: ";
 
             foreach(DiasSemana dia in this._frecuencia)

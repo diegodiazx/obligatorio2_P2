@@ -16,6 +16,8 @@ namespace Dominio
         private List<Avion> _aviones;
         private List<Ruta> _rutas;
         private List<Pasaje> _pasajes;
+
+        public List<Vuelo> Vuelos { get { return _vuelos; } }
  
         public static Sistema Instancia
         {

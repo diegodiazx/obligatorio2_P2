@@ -65,6 +65,16 @@ namespace Dominio
             }
         }
 
+        public string ObtenerCodigoSalida()
+        {
+            return this._aeroSalida.Codigo;
+        }
+        
+        public string ObtenerCodigoLlegada()
+        {
+            return this._aeroLlegada.Codigo;
+        }
+
         public double CostoOperacionAeropuertos()
         {
             return this._aeroSalida.CostoOperacion + this._aeroLlegada.CostoOperacion;
