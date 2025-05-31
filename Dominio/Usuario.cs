@@ -12,6 +12,8 @@ namespace Dominio
         protected string _correo;
         protected string _contra; 
 
+        public Usuario() { }
+
         public Usuario(
             string correo,
             string contra)

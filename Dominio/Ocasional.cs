@@ -22,6 +22,8 @@ namespace Dominio
             }
         }
 
+        public Ocasional() { }
+
         public Ocasional(
             string correo,
             string contra,

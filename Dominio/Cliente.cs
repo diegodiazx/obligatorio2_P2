@@ -22,6 +22,8 @@ namespace Dominio
             }
         }
 
+        public Cliente() { }
+
         public Cliente(
             string correo,
             string contra,

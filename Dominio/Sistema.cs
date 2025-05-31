@@ -192,6 +192,7 @@ namespace Dominio
             }
             return pasajes;
         }
+        /*
 
         public void AgregarUsuario(Usuario usuario)
         {
@@ -203,6 +204,15 @@ namespace Dominio
             {
                 administrador.Validar();
             }
+            this._usuarios.Add(usuario);
+        }
+        */
+
+        //Ahora que Validar() es polimorfico, no es necesario chequear que tipo de Usuario es
+        public void AgregarUsuario(Usuario usuario)
+        {
+            ExisteUsuario(usuario);
+            usuario.Validar();
             this._usuarios.Add(usuario);
         }
 
