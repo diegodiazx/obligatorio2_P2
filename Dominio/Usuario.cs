@@ -12,6 +12,9 @@ namespace Dominio
         protected string _correo;
         protected string _contra; 
 
+        public string Correo { get { return _correo; } set { _correo = value; } }
+        public string Contra { get { return _contra; } set { _contra = value; } }
+
         public Usuario() { }
 
         public Usuario(
@@ -22,7 +25,8 @@ namespace Dominio
             this._contra = contra;
         }
 
-        public void Validar()
+        //Lo hacemos virtual para que nos funcione la validacion en el metodo AgregarUsuario() de sistema
+        public virtual void Validar()
         {
             ValidarContra();
             ValidarCorreo();

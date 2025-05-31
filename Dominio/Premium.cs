@@ -9,6 +9,8 @@ namespace Dominio
     public class Premium : Cliente
     {
         private int _puntos;
+
+        public int Puntos { get { return _puntos;  } }
         
         public Premium(
             string correo,

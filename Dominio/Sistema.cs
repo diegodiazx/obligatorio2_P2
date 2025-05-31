@@ -53,6 +53,20 @@ namespace Dominio
             PrecargaPasajes();
         }
 
+        //Filtramos los clientes de la lista de usuarios
+        public List<Cliente> ObtenerListaClientes()
+        {
+            List<Cliente> _clientes = new List<Cliente>();
+            foreach (Usuario usuario in _usuarios)
+            {
+                if (usuario is Cliente cliente)
+                {
+                    _clientes.Add(cliente);
+                }
+            }
+            return _clientes;
+        }
+
         public string MostrarClientes()
         {
             string clientes = "";
@@ -192,8 +206,8 @@ namespace Dominio
             }
             return pasajes;
         }
-        /*
 
+        /*
         public void AgregarUsuario(Usuario usuario)
         {
             ExisteUsuario(usuario);
@@ -208,7 +222,7 @@ namespace Dominio
         }
         */
 
-        //Ahora que Validar() es polimorfico, no es necesario chequear que tipo de Usuario es
+        //Ahora que Validar() es polimorfico, no es necesario chequear que tipo de Usuario es para saber que Validar() usar
         public void AgregarUsuario(Usuario usuario)
         {
             ExisteUsuario(usuario);
@@ -251,14 +265,22 @@ namespace Dominio
         }
 
         public List<Pasaje> OrdenarPasajesPorFecha()
-        { List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
+        {
+            List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
             pasajesOrdenados.Sort();
             return pasajesOrdenados;
         }
         public List<Pasaje> OrdenarPasajesPorPrecio()
-        { List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
+        { 
+            List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
             pasajesOrdenados.Sort(new CompararPasajePorPrecio());
             return pasajesOrdenados;
+        }
+
+        public List<Cliente> OrdenarClientesPorDocumento(List<Cliente> clientes)
+        {
+            clientes.Sort();
+            return clientes;
         }
        
 
@@ -494,16 +516,8 @@ namespace Dominio
         }
         private void PrecargaPasajes() 
         {
-            //Recorremos la lista de Usuarios y nos guardamos a loc Clientes ya que estos son los que necesitamos
-            //para crear los pasajes.
-            List<Cliente> _clientes = new List<Cliente>();
-            foreach(Usuario usuario in _usuarios)
-            {
-                if(usuario is Cliente cliente)
-                {
-                    _clientes.Add(cliente);
-                }
-            }
+            //Trabajamos solo con los clientes
+            List<Cliente> _clientes = ObtenerListaClientes();
 
             Pasaje pasaje1 = new Pasaje(_vuelos[0], new DateTime(2025, 5, 5), TipoEquipaje.CABINA, _clientes[0]); 
             Pasaje pasaje2 = new Pasaje(_vuelos[1], new DateTime(2025, 5, 6), TipoEquipaje.BODEGA, _clientes[5]); 

@@ -8,7 +8,9 @@ namespace WebApp.Controllers
         Sistema _sistema = Sistema.Instancia;
         public IActionResult Index()
         {
-            return View();
+            List<Cliente> _clientes = _sistema.ObtenerListaClientes();
+            _sistema.OrdenarClientesPorDocumento(_clientes);
+            return View(_clientes);
         }
 
         public IActionResult Add()

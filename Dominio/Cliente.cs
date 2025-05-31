@@ -8,7 +8,7 @@ using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public abstract class Cliente : Usuario, IValidable
+    public abstract class Cliente : Usuario, IValidable, IComparable<Cliente>
     {
         protected string _documento;
         protected string _nombre;
@@ -19,6 +19,33 @@ namespace Dominio
             get
             {
                 return this._nombre;
+            }
+            set
+            {
+                this._nombre = value;
+            }
+        }
+
+        public string Documento
+        {
+            get
+            {
+                return this._documento;
+            }
+            set
+            {
+                this._documento = value;
+            }
+        }
+        public string Nacionalidad
+        {
+            get
+            {
+                return this._nacionalidad;
+            }
+            set
+            {
+               this._nacionalidad = value;
             }
         }
 
@@ -38,7 +65,8 @@ namespace Dominio
 
         public abstract double CalcularTarifaEquipaje(TipoEquipaje equipaje);
 
-        public void Validar()
+        //Hacemos override del metodo Validar de Usuario
+        public override void Validar()
         {
             base.Validar();
             ValidarDocumento();
@@ -89,7 +117,6 @@ namespace Dominio
             }
         }
 
-        
         public override string ToString()
         {
             return $"Nombre: {this._nombre}\n" +
@@ -97,5 +124,9 @@ namespace Dominio
                 $"Nacionalidad: {this._nacionalidad}\n";
         }
 
+        public int CompareTo(Cliente? other)
+        {
+            return this._documento.CompareTo(other._documento);
+        }
     }
 }
