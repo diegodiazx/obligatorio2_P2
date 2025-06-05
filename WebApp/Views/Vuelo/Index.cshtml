@@ -1,6 +1,6 @@
 @using Dominio
 
-@model List<Vuelo>
+@model IEnumerable<Vuelo>
 
 <h1>Vuelos</h1>
 
@@ -11,8 +11,11 @@
         <th scope="col">Ruta</th>
         <th scope="col">Avion</th>
         <th scope="col">Frecuencia</th>
-        <th></th>
-    </tr>
+        <!--Detalles-->
+        <td>Detalles</td>
+        <!--La parte de comprar el pasaje-->
+        <th scope="col">Comprar pasaje</th>
+        </tr>
     </thead>
     <tbody>
     @foreach (Vuelo vuelo in Model)
@@ -27,6 +30,29 @@
             <td>@vuelo.Ruta.ObtenerCodigoSalida() -> @vuelo.Ruta.ObtenerCodigoLlegada() </td>
             <td>@vuelo.Avion.Modelo</td>
             <td>@resultado</td>
+
+            <!--Boton de detalles-->
+            <td><a href="~/Vuelo/Detalles/@vuelo.Numero" class="btn btn-outline secondary">Detalles</a></td>
+
+            <!--La parte de la compra-->
+            <td>
+                <form action="~/Pasaje/Add" method="post">
+                    <!--Le quiero pasar el numero del vuelo pero que no lo vea-->
+                    <input type="hidden" value="@vuelo" name="vuelo" />
+                    <!--Le quiero pasar el id (mail) del cliente pero que no lo vea-->
+                    <input type="hidden" value="@ViewBag.Pasajero" name="pasajero" />
+                    <!--Elegir la fecha-->
+                    <input type="date" name="fecha" />
+                    <!--Seleccion del equipaje-->
+                    <select name="tipoEquipaje">
+                        <option value="">Equipaje</option>
+                            <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
+                            <option value="@TipoEquipaje.CABINA">@TipoEquipaje.CABINA.ToString()</option>
+                            <option value="@TipoEquipaje.BODEGA">@TipoEquipaje.BODEGA.ToString()</option>
+                        </select>
+                    <input type="submit" value="Comprar" />
+                </form>
+            </td>
         </tr>
     }
     </tbody>

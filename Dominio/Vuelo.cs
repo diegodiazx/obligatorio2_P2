@@ -15,29 +15,10 @@ namespace Dominio
         private List<DiasSemana> _frecuencia;
         private double _costoPorAsiento;
 
-        public Avion Avion
-        {
-            get
-            {
-                return _avion;
-            }
-        }
+        public string Numero { get { return _numero;  } }
+        public Avion Avion { get { return _avion; } }
+        public double CostoPorAsiento { get { return _costoPorAsiento; } }
 
-        public double CostoPorAsiento
-        {
-            get
-            {
-                return _costoPorAsiento;
-            }
-        }
-
-        public string Numero
-        {
-            get
-            {
-                return this._numero;
-            }
-        }
         public List<DiasSemana> Frecuencia
         {
             get 

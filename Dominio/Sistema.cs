@@ -109,6 +109,23 @@ namespace Dominio
             return aeropuertoRetorno;
         }
 
+        //Un metodo para obtener el Vuelo segun el id(numero)
+        public Vuelo ObtenerVuelo(string numero)
+        {
+            if (this._vuelos.Count == 0)
+            {
+                throw new Exception("No hay vuelos ingresados en el sistema.");
+            }
+            foreach (Vuelo vuelo in this._vuelos)
+            {
+                if (vuelo.Numero == numero)
+                {
+                    return vuelo;
+                }
+            }
+            throw new Exception("No existe ningun vuelo con ese numero.");
+        }
+
         public string MostrarVuelosAero(Aeropuerto aeropuerto)
         {
             string vuelos = "";
@@ -282,7 +299,6 @@ namespace Dominio
             clientes.Sort();
             return clientes;
         }
-       
 
         private void PrecargaUsuarios()
         {

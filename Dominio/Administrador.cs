@@ -19,7 +19,7 @@ namespace Dominio
             this._apodo = apodo;
         }
 
-        public void Validar()
+        public override void Validar()
         {
             base.Validar();
             ValidarApodo();

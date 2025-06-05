@@ -1,0 +1,41 @@
+﻿@using Dominio
+@model Vuelo
+
+<h2>Detalles</h2>
+
+<div class="card">
+    <div class="card-header">
+        @Model.Numero
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Ruta.ObtenerCodigoSalida() -> @Model.Ruta.ObtenerCodigoLlegada()</h5>
+        <p class="card-text">@Model.Avion.Modelo</p>
+        <p class="card-text">Frecuencia de vuelo: 
+        @{
+            string resultado = "";
+            foreach(DiasSemana dia in @Model.Frecuencia)
+            {
+                resultado += dia + " ";
+            }
+        }
+        </p>
+        <p class="card-text">@resultado</p>
+        <p class="card-text">Costo por asiento: $ @Model.CostoPorAsiento</p>
+        <a href="~/Vuelo/Index" class="btn btn-primary">Volver</a>
+    </div>
+</div>
+
+<h5>Comprar Pasaje</h5>
+
+<form action="~/Pasaje/Add" method="post">
+    <input type="hidden" value="@Model" name="vuelo" />
+    <input type="hidden" value="@ViewBag.Pasajero" name="pasajero" />
+    <input type="date" name="fecha" />
+    <select name="tipoEquipaje">
+        <option value="">Equipaje</option>
+        <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
+        <option value="@TipoEquipaje.CABINA">@TipoEquipaje.CABINA.ToString()</option>
+        <option value="@TipoEquipaje.BODEGA">@TipoEquipaje.BODEGA.ToString()</option>
+    </select>
+    <input type="submit" value="Comprar" />
+</form>

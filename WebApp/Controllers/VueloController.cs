@@ -6,9 +6,21 @@ namespace WebApp.Controllers;
 public class VueloController : Controller
 {
     private Sistema _sistema = Sistema.Instancia;
-    // GET
     public IActionResult Index()
     {
+        List<Cliente> clientes = _sistema.ObtenerListaClientes();
+        //Esto es temporal para poder testearlo
+        ViewBag.Pasajero = clientes[0];
         return View(_sistema.Vuelos);
     }
+
+    //Los detalles del vuelo
+    public IActionResult Detalles(string id)
+    {
+        List<Cliente> clientes = _sistema.ObtenerListaClientes();
+        ViewBag.Pasajero = clientes[0];
+        Vuelo vuelo = _sistema.ObtenerVuelo(id);
+        return View(vuelo);
+    }
+
 }
