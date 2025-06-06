@@ -126,6 +126,24 @@ namespace Dominio
             throw new Exception("No existe ningun vuelo con ese numero.");
         }
 
+        //Obtener cliente
+        public Cliente ObtenerCliente(string correo)
+        {
+            List<Cliente> clientes = ObtenerListaClientes();
+            if (clientes.Count == 0)
+            {
+                throw new Exception("No hay clientes ingresados en el sistema.");
+            }
+            foreach (Cliente cliente in clientes)
+            {
+                if (cliente.Correo == correo)
+                {
+                    return cliente;
+                }
+            }
+            throw new Exception("No existe ningun usuario con ese numero.");
+        }
+
         public string MostrarVuelosAero(Aeropuerto aeropuerto)
         {
             string vuelos = "";

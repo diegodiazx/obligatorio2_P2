@@ -12,7 +12,7 @@
         <th scope="col">Avion</th>
         <th scope="col">Frecuencia</th>
         <!--Detalles-->
-        <td>Detalles</td>
+        <th scope="col">Detalles</th>
         <!--La parte de comprar el pasaje-->
         <th scope="col">Comprar pasaje</th>
         </tr>
@@ -32,19 +32,19 @@
             <td>@resultado</td>
 
             <!--Boton de detalles-->
-            <td><a href="~/Vuelo/Detalles/@vuelo.Numero" class="btn btn-outline secondary">Detalles</a></td>
+                <td><a href="~/Vuelo/Detalles/@vuelo.Numero" class=" btn btn-primary">Detalles</a></td>
 
             <!--La parte de la compra-->
             <td>
                 <form action="~/Pasaje/Add" method="post">
                     <!--Le quiero pasar el numero del vuelo pero que no lo vea-->
-                    <input type="hidden" value="@vuelo" name="vuelo" />
+                    <input type="hidden" value="@vuelo.Numero" name="numeroVuelo" />
                     <!--Le quiero pasar el id (mail) del cliente pero que no lo vea-->
-                    <input type="hidden" value="@ViewBag.Pasajero" name="pasajero" />
+                    <input type="hidden" value="@ViewBag.Pasajero" name="correoPasajero" />
                     <!--Elegir la fecha-->
-                    <input type="date" name="fecha" />
+                    <input type="date" name="fecha" required/>
                     <!--Seleccion del equipaje-->
-                    <select name="tipoEquipaje">
+                    <select name="tipoEquipaje" required>
                         <option value="">Equipaje</option>
                             <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
                             <option value="@TipoEquipaje.CABINA">@TipoEquipaje.CABINA.ToString()</option>

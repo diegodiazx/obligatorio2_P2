@@ -28,8 +28,8 @@
 <h5>Comprar Pasaje</h5>
 
 <form action="~/Pasaje/Add" method="post">
-    <input type="hidden" value="@Model" name="vuelo" />
-    <input type="hidden" value="@ViewBag.Pasajero" name="pasajero" />
+    <input type="hidden" value="@Model.Numero" name="numeroVuelo" />
+    <input type="hidden" value="@ViewBag.Pasajero" name="correoPasajero" />
     <input type="date" name="fecha" />
     <select name="tipoEquipaje">
         <option value="">Equipaje</option>

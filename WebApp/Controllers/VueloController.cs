@@ -10,7 +10,7 @@ public class VueloController : Controller
     {
         List<Cliente> clientes = _sistema.ObtenerListaClientes();
         //Esto es temporal para poder testearlo
-        ViewBag.Pasajero = clientes[0];
+        ViewBag.Pasajero = clientes[0].Correo;
         return View(_sistema.Vuelos);
     }
 
@@ -18,7 +18,7 @@ public class VueloController : Controller
     public IActionResult Detalles(string id)
     {
         List<Cliente> clientes = _sistema.ObtenerListaClientes();
-        ViewBag.Pasajero = clientes[0];
+        ViewBag.Pasajero = clientes[0].Correo;
         Vuelo vuelo = _sistema.ObtenerVuelo(id);
         return View(vuelo);
     }

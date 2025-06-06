@@ -20,12 +20,17 @@ public class PasajeController : Controller
 
     //la compra del pasaje
     [HttpPost]
-    public IActionResult Add(Vuelo vuelo, Cliente pasajero, DateTime fecha, TipoEquipaje tipoEquipaje)
+    public IActionResult Add(string numeroVuelo, string correoPasajero, DateTime fecha, TipoEquipaje tipoEquipaje)
     {
         try
         {
-            Pasaje nuevo = new Pasaje(vuelo, fecha, tipoEquipaje, pasajero);
-            return RedirectToAction("Index",
+            Cliente cliente = _sistema.ObtenerCliente(correoPasajero);
+            Vuelo vuelo = _sistema.ObtenerVuelo(numeroVuelo);
+            Pasaje nuevo = new Pasaje(vuelo, fecha, tipoEquipaje, cliente);
+            _sistema.AgregarPasaje(nuevo);
+            //si se compra exitosamente lo lleva a la lista de sus pasajes
+            //por ahora lo llevamos a la lista de todos los pasajes
+            return RedirectToAction("IndexAdmin",
                 new
                 {
                     mensaje = "Pasaje comprado"
@@ -34,7 +39,8 @@ public class PasajeController : Controller
         }
         catch (Exception ex)
         {
-            return RedirectToAction("Index",
+            //si sale algo mal lo vuelve a llevar a la lista de vuelos
+            return RedirectToAction("Index", "Vuelo",
                 new
                 {
                     mensaje = ex.Message
