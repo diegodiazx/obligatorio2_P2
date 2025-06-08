@@ -68,6 +68,13 @@ namespace Dominio
             return _clientes;
         }
 
+        //METODO DE PRUEBA
+        public Usuario ObtenerAdmin()
+        {
+            return _usuarios[11];
+            
+        }
+
         public string MostrarClientes()
         {
             string clientes = "";
@@ -110,6 +117,20 @@ namespace Dominio
             return aeropuertoRetorno;
         }
 
+        //Devuelve todos los pasajes de un cliente en particular
+        public List<Pasaje> ObtenerPasajesCliente(Cliente cliente)
+        {
+            List<Pasaje> pasajesCliente = new List<Pasaje>();
+            foreach(Pasaje pasaje in _pasajes)
+            {
+                if (pasaje.Pasajero.Equals(cliente))
+                {
+                    pasajesCliente.Add(pasaje);
+                }
+            }
+            return pasajesCliente;
+        }
+
         //Un metodo para obtener el Vuelo segun el id(numero)
         public Vuelo ObtenerVuelo(string numero)
         {
@@ -131,10 +152,31 @@ namespace Dominio
         public List<Vuelo> ObtenerVuelosPorRuta(string salida, string llegada)
         {
             List<Vuelo> vuelosFiltrados = new List<Vuelo>();
-            if(salida == "1" && llegada == "1")
+
+            if (salida == "1" && llegada == "1")
             {
                 vuelosFiltrados = _vuelos;
             }
+
+            foreach (Vuelo vuelo in _vuelos)
+            {
+                string codigoSalida = vuelo.Ruta.ObtenerCodigoSalida();
+                string codigoLlegada = vuelo.Ruta.ObtenerCodigoLlegada();
+
+                if (salida == "1" && (codigoSalida == llegada || codigoLlegada == llegada)){
+                    vuelosFiltrados.Add(vuelo);
+                } else if(llegada == "1" && (codigoSalida == salida || codigoLlegada == salida))
+                {
+                    vuelosFiltrados.Add(vuelo);
+                }
+                else if(codigoSalida == salida && codigoLlegada == llegada)
+                {
+                    vuelosFiltrados.Add(vuelo);
+                }
+
+            }
+
+            /*
             if(salida == "1")
             {
                 foreach (Vuelo vuelo in _vuelos)
@@ -164,6 +206,8 @@ namespace Dominio
                     }
                 }
             }
+            */
+
             return vuelosFiltrados;
         }
 
@@ -340,21 +384,20 @@ namespace Dominio
             this._pasajes.Add(pasaje);
         }
 
-        public List<Pasaje> OrdenarPasajesPorFecha()
+        public void OrdenarPasajesPorFecha()
         {
-            List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
+            List<Pasaje> pasajesOrdenados = _pasajes;
             pasajesOrdenados.Sort();
-            return pasajesOrdenados;
         }
-        public List<Pasaje> OrdenarPasajesPorPrecio()
+        public void OrdenarPasajesPorPrecio()
         { 
-            List<Pasaje> pasajesOrdenados = new List<Pasaje>(_pasajes);
+            List<Pasaje> pasajesOrdenados = _pasajes;
             pasajesOrdenados.Sort(new CompararPasajePorPrecio());
-            return pasajesOrdenados;
         }
 
-        public List<Cliente> OrdenarClientesPorDocumento(List<Cliente> clientes)
+        public List<Cliente> OrdenarClientesPorDocumento()
         {
+            List<Cliente> clientes = ObtenerListaClientes();
             clientes.Sort();
             return clientes;
         }

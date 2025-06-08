@@ -8,9 +8,8 @@ namespace WebApp.Controllers
         Sistema _sistema = Sistema.Instancia;
         public IActionResult Index()
         {
-            List<Cliente> _clientes = _sistema.ObtenerListaClientes();
-            _sistema.OrdenarClientesPorDocumento(_clientes);
-            return View(_clientes);
+            List<Cliente> clientes = _sistema.OrdenarClientesPorDocumento();
+            return View(clientes);
         }
 
         public IActionResult Add()
@@ -31,6 +30,14 @@ namespace WebApp.Controllers
                 ViewBag.Error = e.Message;
                 return View();
             }
+        }
+
+        public IActionResult Perfil()
+        {
+            List<Cliente> clientes = _sistema.ObtenerListaClientes();
+            Cliente cliente = clientes[0];
+
+            return View(cliente);
         }
     }
 }

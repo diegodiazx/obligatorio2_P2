@@ -6,17 +6,26 @@ namespace WebApp.Controllers;
 public class PasajeController : Controller
 {
     private Sistema _sistema = Sistema.Instancia;
-    public IActionResult IndexAdmin()
+
+    public IActionResult Index()
     {
-        List<Pasaje> pasajesOrdenadosPorFecha = _sistema.OrdenarPasajesPorFecha();
-        return View(pasajesOrdenadosPorFecha);
+        List<Cliente> clientes = _sistema.ObtenerListaClientes();
+        Usuario usuarioLogueado = clientes[0];
+        //Usuario usuarioLogueado = _sistema.ObtenerAdmin();
+
+        List<Pasaje> pasajes = _sistema.Pasajes;
+
+        if(usuarioLogueado is Cliente clienteLogueado)
+        {
+            _sistema.OrdenarPasajesPorPrecio();
+            pasajes = _sistema.ObtenerPasajesCliente(clienteLogueado);
+        }
+        else
+        {
+            _sistema.OrdenarPasajesPorFecha();
+        }
+        return View(pasajes);
     }
-    public IActionResult IndexCliente()
-    {
-        List<Pasaje> pasajesOrdenadosPorPrecio = _sistema.OrdenarPasajesPorPrecio();
-        return View(pasajesOrdenadosPorPrecio);
-    }
-    //creo que esta mal lo de tener 2 index separados, después vamos a ver lo de reconocer qué usuario está loggeado.
 
     //la compra del pasaje
     [HttpPost]
@@ -30,7 +39,7 @@ public class PasajeController : Controller
             _sistema.AgregarPasaje(nuevo);
             //si se compra exitosamente lo lleva a la lista de sus pasajes
             //por ahora lo llevamos a la lista de todos los pasajes
-            return RedirectToAction("IndexAdmin",
+            return RedirectToAction("Index",
                 new
                 {
                     mensaje = "Pasaje comprado"

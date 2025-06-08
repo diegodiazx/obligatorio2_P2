@@ -1,0 +1,21 @@
+﻿@using Dominio
+@model Cliente
+
+<h2>Perfil</h2>
+
+<div class="card">
+    <div class="card-header">
+        @Model.Nombre
+    </div>
+    <div class="card-body">
+        <p class="card-text">Tipo: @Model.GetType().Name</p>
+        <p class="card-text">Email: @Model.Correo</p>
+        <p class="card-text">Contraseña: @Model.Contra</p>
+        <p class="card-text">Documento: @Model.Documento</p>
+        <p class="card-text">Nacionalidad: @Model.Nacionalidad</p>
+        @if(Model is Premium premium)
+        {
+            <p class="card-text">Puntos: @premium.Puntos</p>
+        }
+    </div>
+</div>
