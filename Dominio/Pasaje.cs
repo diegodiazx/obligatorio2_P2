@@ -55,7 +55,7 @@ namespace Dominio
             //Casteamos de DayOfWeek a nuestro enum DiasSemana para obtener el day of week en español
             DiasSemana diaEsp = (DiasSemana)this._fecha.DayOfWeek;
             if (!this._vuelo.Frecuencia.Contains(diaEsp)){
-                throw new Exception("La fecha del pasaje " + this._id + " no corresponde con la frecuencia del vuelo.");
+                throw new Exception("La fecha del pasaje no corresponde con la frecuencia del vuelo.");
             }
         }
 

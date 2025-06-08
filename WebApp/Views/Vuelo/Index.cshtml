@@ -2,7 +2,32 @@
 
 @model IEnumerable<Vuelo>
 
+@if (!string.IsNullOrWhiteSpace(ViewBag.Mensaje))
+{
+    <div class="alert alert-danger">
+        @ViewBag.Mensaje
+    </div>
+}
+
 <h1>Vuelos</h1>
+
+<form method="post">
+    <select name="aeroSalida">
+        <option value="1"> Seleccione Salida </option>
+        @foreach(Aeropuerto aeropuerto in ViewBag.Aeropuertos)
+        {
+            <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
+        }
+    </select>
+    <select name="aeroLlegada">
+        <option value="1"> Seleccione Llegada </option>
+        @foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
+        {
+            <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
+        }
+    </select>
+    <input type="submit" value="Filtrar" />
+</form>
 
 <table class="table">
     <thead class="table-light">

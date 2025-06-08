@@ -20,6 +20,7 @@ namespace Dominio
 
         public List<Vuelo> Vuelos { get { return _vuelos; } }
         public List<Pasaje> Pasajes { get { return _pasajes; } }
+        public List<Aeropuerto> Aeropuertos { get { return _aeropuertos;  } }
         public static Sistema Instancia
         {
             get
@@ -124,6 +125,46 @@ namespace Dominio
                 }
             }
             throw new Exception("No existe ningun vuelo con ese numero.");
+        }
+
+        //Obtener vuelos por la ruta
+        public List<Vuelo> ObtenerVuelosPorRuta(string salida, string llegada)
+        {
+            List<Vuelo> vuelosFiltrados = new List<Vuelo>();
+            if(salida == "1" && llegada == "1")
+            {
+                vuelosFiltrados = _vuelos;
+            }
+            if(salida == "1")
+            {
+                foreach (Vuelo vuelo in _vuelos)
+                {
+                    if (vuelo.Ruta.ObtenerCodigoSalida() == llegada || vuelo.Ruta.ObtenerCodigoLlegada() == llegada)
+                    {
+                        vuelosFiltrados.Add(vuelo);
+                    }
+                }
+            }else if (llegada == "1")
+            {
+                foreach (Vuelo vuelo in _vuelos)
+                {
+                    if (vuelo.Ruta.ObtenerCodigoSalida() == salida || vuelo.Ruta.ObtenerCodigoLlegada() == salida)
+                    {
+                        vuelosFiltrados.Add(vuelo);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Vuelo vuelo in _vuelos)
+                {
+                    if (vuelo.Ruta.ObtenerCodigoSalida() == salida && vuelo.Ruta.ObtenerCodigoLlegada() == llegada)
+                    {
+                        vuelosFiltrados.Add(vuelo);
+                    }
+                }
+            }
+            return vuelosFiltrados;
         }
 
         //Obtener cliente
