@@ -20,13 +20,22 @@ public class VueloController : Controller
     [HttpPost]
     public IActionResult Index(string aeroSalida, string aeroLlegada)
     {
-        List<Cliente> clientes = _sistema.ObtenerListaClientes();
-        //Esto es temporal para poder testearlo
-        ViewBag.Pasajero = clientes[0].Correo;
+        try
+        {
+            List<Cliente> clientes = _sistema.ObtenerListaClientes();
+            //Esto es temporal para poder testearlo
+            ViewBag.Pasajero = clientes[0].Correo;
 
-        ViewBag.Aeropuertos = _sistema.Aeropuertos;
-        List<Vuelo> vuelosFiltrados = _sistema.ObtenerVuelosPorRuta(aeroSalida, aeroLlegada);
-        return View(vuelosFiltrados);
+            ViewBag.Aeropuertos = _sistema.Aeropuertos;
+            List<Vuelo> vuelosFiltrados = _sistema.ObtenerVuelosPorRuta(aeroSalida, aeroLlegada);
+            return View(vuelosFiltrados);
+
+        }
+        catch (Exception e)
+        {
+            return RedirectToAction("Index", new { mensaje = e.Message });
+        }
+
     }
 
     //Los detalles del vuelo

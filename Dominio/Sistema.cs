@@ -176,6 +176,11 @@ namespace Dominio
 
             }
 
+            if(vuelosFiltrados.Count() == 0)
+            {
+                throw new Exception("No hay ningun vuelo con esa ruta");
+            }
+
             /*
             if(salida == "1")
             {
