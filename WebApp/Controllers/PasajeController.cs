@@ -13,17 +13,7 @@ public class PasajeController : Controller
         Usuario usuarioLogueado = clientes[0];
         //Usuario usuarioLogueado = _sistema.ObtenerAdmin();
 
-        List<Pasaje> pasajes = _sistema.Pasajes;
-
-        if(usuarioLogueado is Cliente clienteLogueado)
-        {
-            _sistema.OrdenarPasajesPorPrecio();
-            pasajes = _sistema.ObtenerPasajesCliente(clienteLogueado);
-        }
-        else
-        {
-            _sistema.OrdenarPasajesPorFecha();
-        }
+        List<Pasaje> pasajes = _sistema.OrdenarPasajes(usuarioLogueado);
         return View(pasajes);
     }
 

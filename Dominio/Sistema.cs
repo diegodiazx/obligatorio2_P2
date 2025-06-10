@@ -153,7 +153,7 @@ namespace Dominio
         {
             List<Vuelo> vuelosFiltrados = new List<Vuelo>();
 
-            if (salida == "1" && llegada == "1")
+            if (salida == null && llegada == null)
             {
                 vuelosFiltrados = _vuelos;
             }
@@ -163,9 +163,9 @@ namespace Dominio
                 string codigoSalida = vuelo.Ruta.ObtenerCodigoSalida();
                 string codigoLlegada = vuelo.Ruta.ObtenerCodigoLlegada();
 
-                if (salida == "1" && (codigoSalida == llegada || codigoLlegada == llegada)){
+                if (salida == null && (codigoSalida == llegada || codigoLlegada == llegada)){
                     vuelosFiltrados.Add(vuelo);
-                } else if(llegada == "1" && (codigoSalida == salida || codigoLlegada == salida))
+                } else if(llegada == null && (codigoSalida == salida || codigoLlegada == salida))
                 {
                     vuelosFiltrados.Add(vuelo);
                 }
@@ -382,6 +382,20 @@ namespace Dominio
         {
             pasaje.Validar();
             this._pasajes.Add(pasaje);
+        }
+
+        public List<Pasaje> OrdenarPasajes(Usuario usuario)
+        {
+            if (usuario is Cliente cliente)
+            {
+                OrdenarPasajesPorPrecio();
+                return ObtenerPasajesCliente(cliente);
+            }
+            else
+            {
+                OrdenarPasajesPorFecha();
+                return _pasajes;
+            }
         }
 
         public void OrdenarPasajesPorFecha()

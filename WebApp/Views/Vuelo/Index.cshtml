@@ -13,14 +13,14 @@
 
 <form method="post">
     <select name="aeroSalida">
-        <option value="1"> Seleccione Salida </option>
+        <option value=""> Seleccione Salida </option>
         @foreach(Aeropuerto aeropuerto in ViewBag.Aeropuertos)
         {
             <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
         }
     </select>
     <select name="aeroLlegada">
-        <option value="1"> Seleccione Llegada </option>
+        <option value=""> Seleccione Llegada </option>
         @foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
         {
             <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
