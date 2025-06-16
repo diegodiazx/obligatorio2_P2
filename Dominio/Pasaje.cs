@@ -41,6 +41,9 @@ namespace Dominio
         public void Validar()
         {
             ValidarFecha();
+            ValidarEquipaje();
+            //agregue este metodo nuevo, validarequipaje %
+            //y validarfecha ahora tiene 2 metodos adentro
         }
 
         //Todavia no debemos implementar el metodo CalcularPrecio, por eso es 0.
@@ -52,10 +55,32 @@ namespace Dominio
 
         private void ValidarFecha()
         {
+            ValidarFechaValor();
+            ValidarFechaFrecuencia();
+        }
+        private void ValidarFechaValor() //agregue este metodo; para lo mismo que equipaje. el profe puso lo de -1 por la precarga,
+            //si no te tira excepcion de una, porque hay pasajes precargados previos a hoy
+        // igual no me estaria andando e igual dijo que aunque el opina lo mismo y es lo logico, que sea a futuro, es innecesario
+        // porque no esta claro. tambien si validamos que no se puede desde un año para atrás, es innecesario lo de 01/01/0001
+        {
+            if (this._fecha == DateTime.MinValue || this._fecha <= DateTime.Today.AddYears(-1)){
+                throw new Exception("Debe introducir una fecha valida.");
+            }
+        }
+
+        private void ValidarFechaFrecuencia()
+        {
             //Casteamos de DayOfWeek a nuestro enum DiasSemana para obtener el day of week en español
             DiasSemana diaEsp = (DiasSemana)this._fecha.DayOfWeek;
             if (!this._vuelo.Frecuencia.Contains(diaEsp)){
                 throw new Exception("La fecha del pasaje no corresponde con la frecuencia del vuelo.");
+            }
+        }
+        private void ValidarEquipaje()
+        {
+            if (_equipaje == 0)
+            {
+                throw new Exception("Debe seleccionar un tipo de equipaje");
             }
         }
 

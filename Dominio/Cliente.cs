@@ -14,40 +14,10 @@ namespace Dominio
         protected string _nombre;
         protected string _nacionalidad;
 
-        public string Nombre
-        {
-            get
-            {
-                return this._nombre;
-            }
-            set
-            {
-                this._nombre = value;
-            }
-        }
+        public string Nombre { get { return this._nombre; } set { this._nombre = value; } }
 
-        public string Documento
-        {
-            get
-            {
-                return this._documento;
-            }
-            set
-            {
-                this._documento = value;
-            }
-        }
-        public string Nacionalidad
-        {
-            get
-            {
-                return this._nacionalidad;
-            }
-            set
-            {
-               this._nacionalidad = value;
-            }
-        }
+        public string Documento { get { return this._documento; } set { this._documento = value; } }
+        public string Nacionalidad { get { return this._nacionalidad; } set { this._nacionalidad = value; } }
 
         public Cliente() { }
 

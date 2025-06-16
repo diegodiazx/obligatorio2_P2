@@ -19,21 +19,9 @@ namespace Dominio
         public Avion Avion { get { return _avion; } }
         public double CostoPorAsiento { get { return _costoPorAsiento; } }
 
-        public List<DiasSemana> Frecuencia
-        {
-            get 
-            {
-                return this._frecuencia;
-            }
-        }
+        public List<DiasSemana> Frecuencia { get { return this._frecuencia; } }
 
-        public Ruta Ruta
-        {
-            get
-            {
-                return this._ruta;
-            }
-        }
+        public Ruta Ruta { get { return this._ruta; } }
 
         public Vuelo(
             string numero,
@@ -81,10 +69,9 @@ namespace Dominio
                         throw new Exception("Los ultimos caracteres deben ser numeros.");
                     }
                 }
-            } else
+        } else
             {
                 throw new Exception("El numero debe comenzar con 2 letras mayusculas y terminar con 1 a 4 numeros.");
-
             }
         }
 

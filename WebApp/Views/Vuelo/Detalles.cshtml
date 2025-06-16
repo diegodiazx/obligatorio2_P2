@@ -3,6 +3,12 @@
 
 <h2>Detalles</h2>
 
+<!-- nuevo-->
+@if (!string.IsNullOrWhiteSpace(ViewBag.Mensaje))
+{
+    <div class="alert alert-danger">@ViewBag.Mensaje</div>
+}
+
 <div class="card">
     <div class="card-header">
         @Model.Numero
@@ -30,12 +36,13 @@
 <form action="~/Pasaje/Add" method="post">
     <input type="hidden" value="@Model.Numero" name="numeroVuelo" />
     <input type="hidden" value="@ViewBag.Pasajero" name="correoPasajero" />
-    <input type="date" name="fecha" />
-    <select name="tipoEquipaje">
+    <input type="date" name="fecha" required />
+    <select name="tipoEquipaje" required> <!--agregue el required igual, aunque agregue la validacion-->
         <option value="">Equipaje</option>
         <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
         <option value="@TipoEquipaje.CABINA">@TipoEquipaje.CABINA.ToString()</option>
         <option value="@TipoEquipaje.BODEGA">@TipoEquipaje.BODEGA.ToString()</option>
     </select>
+     <input type="hidden" name="origen" value="Detalles" /> <!--nuevo-->
     <input type="submit" value="Comprar" />
 </form>

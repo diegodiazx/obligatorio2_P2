@@ -11,17 +11,7 @@ namespace Dominio
     {
         private bool _elegible;
 
-        public bool Elegible
-        {
-            get
-            {
-                return this._elegible;
-            }
-            set
-            {
-                this._elegible = value;
-            }
-        }
+        public bool Elegible { get { return this._elegible; } set { this._elegible = value; } }
 
         public Ocasional() { }
 

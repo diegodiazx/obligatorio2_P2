@@ -39,8 +39,11 @@ public class VueloController : Controller
     }
 
     //Los detalles del vuelo
-    public IActionResult Detalles(string id)
+    
+    //agregue lo de mensaje al iactionresult de detalles, para que lo pueda mostrar ahi, no solo en el index %
+    public IActionResult Detalles(string id, string mensaje)
     {
+        ViewBag.mensaje = mensaje;
         List<Cliente> clientes = _sistema.ObtenerListaClientes();
         ViewBag.Pasajero = clientes[0].Correo;
         Vuelo vuelo = _sistema.ObtenerVuelo(id);

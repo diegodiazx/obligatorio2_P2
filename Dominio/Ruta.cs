@@ -16,29 +16,11 @@ namespace Dominio
         private Aeropuerto _aeroLlegada;
         private double _distancia;
 
-        public Aeropuerto Salida
-        {
-            get
-            {
-                return this._aeroSalida;
-            }
-        }
+        public Aeropuerto Salida { get { return this._aeroSalida; } }
 
-        public Aeropuerto Llegada
-        {
-            get
-            {
-                return this._aeroLlegada;
-            }
-        }
+        public Aeropuerto Llegada { get { return this._aeroLlegada; } }
 
-        public double Distancia
-        {
-            get
-            {
-                return this._distancia;
-            }
-        }
+        public double Distancia { get { return this._distancia; } }
 
         public Ruta(
             Aeropuerto aeroSalida,

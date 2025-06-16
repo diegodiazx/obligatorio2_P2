@@ -4,6 +4,12 @@
 
 <h1>Pasajes</h1>
 
+<!--nuevo, para poder mostrar mensaje de exito-->
+@if (!string.IsNullOrEmpty(ViewBag.mensaje))
+{
+    <div class="alert alert-success">@ViewBag.mensaje</div>
+}
+
 <table class="table">
     <thead class="table-light">
         <tr>

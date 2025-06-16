@@ -68,7 +68,8 @@
                     <input type="hidden" value="@ViewBag.Pasajero" name="correoPasajero" />
                     <!--Elegir la fecha-->
                     <input type="date" name="fecha" required/>
-                    <!--Seleccion del equipaje-->
+                    <!--Seleccion del equipaje, por el required parecia que lo necesitaba siempre pero 
+                    como el required no estaba en detalles me di cuenta que faltaba la validacion %-->
                     <select name="tipoEquipaje" required>
                         <option value="">Equipaje</option>
                             <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
