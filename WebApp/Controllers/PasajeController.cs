@@ -10,7 +10,7 @@ public class PasajeController : Controller
     public IActionResult Index(string mensaje)
     {
         List<Cliente> clientes = _sistema.ObtenerListaClientes(); 
-        Usuario usuarioLogueado = clientes[0];
+        Usuario usuarioLogueado = clientes[7];
         //Usuario usuarioLogueado = _sistema.ObtenerAdmin();
         List<Pasaje> pasajes = _sistema.OrdenarPasajes(usuarioLogueado);
         ViewBag.mensaje = mensaje;

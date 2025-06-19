@@ -1,15 +1,32 @@
 ﻿using Dominio;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApp.Controllers
 {
     public class ClienteController : Controller
     {
         Sistema _sistema = Sistema.Instancia;
-        public IActionResult Index()
+        public IActionResult Index(string mensaje, bool exito)
         {
             List<Cliente> clientes = _sistema.OrdenarClientesPorDocumento();
+            ViewBag.Exito = exito;
+            ViewBag.Mensaje = mensaje;
             return View(clientes);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string correoCliente, int puntos, bool elegible)
+        {
+            try
+            {
+                _sistema.ActualizarCliente(correoCliente, puntos, elegible);
+                return RedirectToAction("Index", new { mensaje = "Cliente actualizado correctamente", exito = true });
+
+            } catch(Exception e)
+            {
+                return RedirectToAction("Index", new { mensaje = e.Message, exito = false });
+            }
         }
 
         public IActionResult Add()
@@ -23,7 +40,10 @@ namespace WebApp.Controllers
             try
             {
                 _sistema.AgregarUsuario(cliente);
-                return RedirectToAction("Index");
+                HttpContext.Session.SetString("correo", cliente.Correo);
+                HttpContext.Session.SetString("rol", "Cliente");
+
+                return RedirectToAction("Index", "Vuelo");
             }
             catch (Exception e)
             {
@@ -35,7 +55,7 @@ namespace WebApp.Controllers
         public IActionResult Perfil()
         {
             List<Cliente> clientes = _sistema.ObtenerListaClientes();
-            Cliente cliente = clientes[0];
+            Cliente cliente = clientes[7];
 
             return View(cliente);
         }

@@ -54,6 +54,25 @@ namespace Dominio
             PrecargaPasajes();
         }
 
+        public Usuario Login(string correo, string contra)
+        {
+            foreach (Usuario usuario in _usuarios)
+            {
+                if (usuario.Correo == correo)
+                {
+                    if (usuario.Contra == contra)
+                    {
+                        return usuario;
+                    }
+                    else
+                    {
+                        throw new Exception("Contraseña incorrecta");
+                    }
+                }
+            }
+            throw new Exception("Correo incorrecto");
+        }
+
         //METODO DE PRUEBA : HAY QUE BORRAR
         public Usuario ObtenerAdmin()
         {
@@ -371,6 +390,27 @@ namespace Dominio
         { 
             List<Pasaje> pasajesOrdenados = _pasajes;
             pasajesOrdenados.Sort(new CompararPasajePorPrecio());
+        }
+
+        //Actualizamos la informacion del cliente 
+        public void ActualizarCliente(string correo, int puntos, bool elegible)
+        {
+            List<Cliente> clientes = ObtenerListaClientes();
+            foreach(Cliente cliente in clientes)
+            {
+                if(cliente.Correo == correo)
+                {
+                    if(cliente is Premium premium)
+                    {
+                        premium.ValidarPuntos(puntos);
+                        premium.Puntos = puntos;
+                    }
+                    else if(cliente is Ocasional ocasional)
+                    {
+                        ocasional.Elegible = elegible;
+                    }
+                }
+            }
         }
 
         private void PrecargaUsuarios()

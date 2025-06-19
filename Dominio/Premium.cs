@@ -10,7 +10,7 @@ namespace Dominio
     {
         private int _puntos;
 
-        public int Puntos { get { return _puntos;  } }
+        public int Puntos { get { return _puntos; } set { _puntos = value; } }
         
         public Premium(
             string correo,
@@ -21,6 +21,14 @@ namespace Dominio
             ) : base(correo, contra, documento, nombre, nacionalidad)
         {
             this._puntos = 0;
+        }
+
+        public void ValidarPuntos(int puntos)
+        {
+            if(puntos < 0)
+            {
+                throw new Exception("Los puntos deben ser un numero positivo.");
+            }
         }
 
         public override double CalcularTarifaEquipaje(TipoEquipaje equipaje)
