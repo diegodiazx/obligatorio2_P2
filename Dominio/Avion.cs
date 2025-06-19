@@ -17,11 +17,8 @@ namespace Dominio
         private double _costoPorKm;
 
         public double Alcance { get { return this._alcance; } }
-
         public string Modelo { get { return this._modelo; } }
-
         public double CostoPorKm { get { return this._costoPorKm; } }
-
         public int CantAsientos { get { return this._cantAsientos; } }
 
         public Avion(

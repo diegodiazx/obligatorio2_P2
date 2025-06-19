@@ -41,12 +41,10 @@ namespace Dominio
         public void Validar()
         {
             ValidarFecha();
+            //Agregamos una validacion para el equipaje
             ValidarEquipaje();
-            //agregue este metodo nuevo, validarequipaje %
-            //y validarfecha ahora tiene 2 metodos adentro
         }
 
-        //Todavia no debemos implementar el metodo CalcularPrecio, por eso es 0.
         public void CalcularPrecio()
         {
             this._precio = this._vuelo.CostoPorAsiento * (1 + s_margenGanancias + this._pasajero.CalcularTarifaEquipaje(this._equipaje)) 
@@ -55,14 +53,14 @@ namespace Dominio
 
         private void ValidarFecha()
         {
+            //Dividimos el ValidarFecha en dos metodos
             ValidarFechaValor();
             ValidarFechaFrecuencia();
         }
-        private void ValidarFechaValor() //agregue este metodo; para lo mismo que equipaje. el profe puso lo de -1 por la precarga,
-            //si no te tira excepcion de una, porque hay pasajes precargados previos a hoy
-        // igual no me estaria andando e igual dijo que aunque el opina lo mismo y es lo logico, que sea a futuro, es innecesario
-        // porque no esta claro. tambien si validamos que no se puede desde un año para atrás, es innecesario lo de 01/01/0001
+
+        private void ValidarFechaValor() 
         {
+            //Permitimos que la fecha puede ser del dia actual pero del anio pasado, asi nos entran los datos de las precargas, pero no menos que eso
             if (this._fecha == DateTime.MinValue || this._fecha <= DateTime.Today.AddYears(-1)){
                 throw new Exception("Debe introducir una fecha valida.");
             }

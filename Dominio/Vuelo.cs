@@ -18,9 +18,7 @@ namespace Dominio
         public string Numero { get { return _numero;  } }
         public Avion Avion { get { return _avion; } }
         public double CostoPorAsiento { get { return _costoPorAsiento; } }
-
         public List<DiasSemana> Frecuencia { get { return this._frecuencia; } }
-
         public Ruta Ruta { get { return this._ruta; } }
 
         public Vuelo(

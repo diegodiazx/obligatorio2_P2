@@ -15,7 +15,6 @@ namespace Dominio
         private double _costoTasas;
 
         public string Codigo { get { return this._codigo; } }
-
         public double CostoOperacion { get { return this._costoOperacion; } }
 
         public Aeropuerto(

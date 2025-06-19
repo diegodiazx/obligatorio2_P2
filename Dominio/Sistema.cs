@@ -54,6 +54,13 @@ namespace Dominio
             PrecargaPasajes();
         }
 
+        //METODO DE PRUEBA : HAY QUE BORRAR
+        public Usuario ObtenerAdmin()
+        {
+            return _usuarios[11];
+
+        }
+
         //Filtramos los clientes de la lista de usuarios
         public List<Cliente> ObtenerListaClientes()
         {
@@ -66,13 +73,6 @@ namespace Dominio
                 }
             }
             return _clientes;
-        }
-
-        //METODO DE PRUEBA
-        public Usuario ObtenerAdmin()
-        {
-            return _usuarios[11];
-            
         }
 
         public string MostrarClientes()
@@ -96,25 +96,30 @@ namespace Dominio
             return clientes;
         }
 
-        public Aeropuerto ObtenerAeropuerto(string codigo)
+        //Obtener cliente por correo 
+        public Cliente ObtenerCliente(string correo)
         {
-            Aeropuerto aeropuertoRetorno = null;
-            if (this._aeropuertos.Count == 0)
+            List<Cliente> clientes = ObtenerListaClientes();
+            if (clientes.Count == 0)
             {
-                throw new Exception("No hay aeropuertos ingresados en el sistema.");
+                throw new Exception("No hay clientes ingresados en el sistema.");
             }
-            foreach (Aeropuerto aeropuerto in this._aeropuertos)
+            foreach (Cliente cliente in clientes)
             {
-                if(aeropuerto.Codigo == codigo)
+                if (cliente.Correo == correo)
                 {
-                    aeropuertoRetorno = aeropuerto;
+                    return cliente;
                 }
             }
-            if(aeropuertoRetorno == null)
-            {
-                throw new Exception("No existe ningun aeropuerto con ese codigo.");
-            }
-            return aeropuertoRetorno;
+            throw new Exception("No existe ningun usuario con ese numero.");
+        }
+
+        //Ordenamos a los clientes por documento
+        public List<Cliente> OrdenarClientesPorDocumento()
+        {
+            List<Cliente> clientes = ObtenerListaClientes();
+            clientes.Sort();
+            return clientes;
         }
 
         //Devuelve todos los pasajes de un cliente en particular
@@ -129,6 +134,27 @@ namespace Dominio
                 }
             }
             return pasajesCliente;
+        }
+
+        public Aeropuerto ObtenerAeropuerto(string codigo)
+        {
+            Aeropuerto aeropuertoRetorno = null;
+            if (this._aeropuertos.Count == 0)
+            {
+                throw new Exception("No hay aeropuertos ingresados en el sistema.");
+            }
+            foreach (Aeropuerto aeropuerto in this._aeropuertos)
+            {
+                if (aeropuerto.Codigo == codigo)
+                {
+                    aeropuertoRetorno = aeropuerto;
+                }
+            }
+            if (aeropuertoRetorno == null)
+            {
+                throw new Exception("No existe ningun aeropuerto con ese codigo.");
+            }
+            return aeropuertoRetorno;
         }
 
         //Un metodo para obtener el Vuelo segun el id(numero)
@@ -173,65 +199,12 @@ namespace Dominio
                 {
                     vuelosFiltrados.Add(vuelo);
                 }
-
             }
-
             if(vuelosFiltrados.Count() == 0)
             {
                 throw new Exception("No hay ningun vuelo con esa ruta");
             }
-
-            /*
-            if(salida == "1")
-            {
-                foreach (Vuelo vuelo in _vuelos)
-                {
-                    if (vuelo.Ruta.ObtenerCodigoSalida() == llegada || vuelo.Ruta.ObtenerCodigoLlegada() == llegada)
-                    {
-                        vuelosFiltrados.Add(vuelo);
-                    }
-                }
-            }else if (llegada == "1")
-            {
-                foreach (Vuelo vuelo in _vuelos)
-                {
-                    if (vuelo.Ruta.ObtenerCodigoSalida() == salida || vuelo.Ruta.ObtenerCodigoLlegada() == salida)
-                    {
-                        vuelosFiltrados.Add(vuelo);
-                    }
-                }
-            }
-            else
-            {
-                foreach (Vuelo vuelo in _vuelos)
-                {
-                    if (vuelo.Ruta.ObtenerCodigoSalida() == salida && vuelo.Ruta.ObtenerCodigoLlegada() == llegada)
-                    {
-                        vuelosFiltrados.Add(vuelo);
-                    }
-                }
-            }
-            */
-
             return vuelosFiltrados;
-        }
-
-        //Obtener cliente
-        public Cliente ObtenerCliente(string correo)
-        {
-            List<Cliente> clientes = ObtenerListaClientes();
-            if (clientes.Count == 0)
-            {
-                throw new Exception("No hay clientes ingresados en el sistema.");
-            }
-            foreach (Cliente cliente in clientes)
-            {
-                if (cliente.Correo == correo)
-                {
-                    return cliente;
-                }
-            }
-            throw new Exception("No existe ningun usuario con ese numero.");
         }
 
         public string MostrarVuelosAero(Aeropuerto aeropuerto)
@@ -332,21 +305,6 @@ namespace Dominio
             return pasajes;
         }
 
-        /*
-        public void AgregarUsuario(Usuario usuario)
-        {
-            ExisteUsuario(usuario);
-            if (usuario is Cliente cliente)
-            {
-                cliente.Validar();
-            } else if (usuario is Administrador administrador)
-            {
-                administrador.Validar();
-            }
-            this._usuarios.Add(usuario);
-        }
-        */
-
         //Ahora que Validar() es polimorfico, no es necesario chequear que tipo de Usuario es para saber que Validar() usar
         public void AgregarUsuario(Usuario usuario)
         {
@@ -389,6 +347,7 @@ namespace Dominio
             this._pasajes.Add(pasaje);
         }
 
+        //Ordenamos los pasajes dependiendo si es cliente o admin
         public List<Pasaje> OrdenarPasajes(Usuario usuario)
         {
             if (usuario is Cliente cliente)
@@ -412,13 +371,6 @@ namespace Dominio
         { 
             List<Pasaje> pasajesOrdenados = _pasajes;
             pasajesOrdenados.Sort(new CompararPasajePorPrecio());
-        }
-
-        public List<Cliente> OrdenarClientesPorDocumento()
-        {
-            List<Cliente> clientes = ObtenerListaClientes();
-            clientes.Sort();
-            return clientes;
         }
 
         private void PrecargaUsuarios()

@@ -4,6 +4,6 @@ public class CompararPasajePorPrecio:IComparer<Pasaje>
 {
     public int Compare(Pasaje? x, Pasaje? y)
     {
-        return x.Precio.CompareTo(y.Precio) *-1;
+        return x.Precio.CompareTo(y.Precio) * -1;
     }
 }
