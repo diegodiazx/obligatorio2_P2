@@ -73,11 +73,19 @@ namespace Dominio
             throw new Exception("Correo incorrecto");
         }
 
-        //METODO DE PRUEBA : HAY QUE BORRAR
-        public Usuario ObtenerAdmin()
+        public Usuario ObtenerUsuario(string correo)
         {
-            return _usuarios[11];
-
+            foreach (Usuario usuario in _usuarios)
+            {
+                if (usuario.Correo == correo)
+                {
+                    return usuario;
+                }
+            }
+            return null;
+            //Tener la excepcion ahi hace que al intentar acceder al Index de Pasaje sin estar logueado, 
+            //muestra esta excepcion en lugar del mensaje del filtro
+            //throw new Exception("No existe un usuario con ese correo");
         }
 
         //Filtramos los clientes de la lista de usuarios
@@ -130,7 +138,10 @@ namespace Dominio
                     return cliente;
                 }
             }
-            throw new Exception("No existe ningun usuario con ese numero.");
+            return null;
+            //Tener la excepcion ahi hace que al intentar acceder al Perfil de Cliente sin estar logueado, 
+            //muestra esta excepcion en lugar del mensaje del filtro
+            //throw new Exception("No existe ningun usuario con ese numero.");
         }
 
         //Ordenamos a los clientes por documento

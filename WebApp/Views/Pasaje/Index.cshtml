@@ -4,34 +4,42 @@
 
 <h1>Pasajes</h1>
 
-<!--nuevo, para poder mostrar mensaje de exito-->
 @if (!string.IsNullOrEmpty(ViewBag.mensaje))
 {
     <div class="alert alert-success">@ViewBag.mensaje</div>
 }
 
-<table class="table">
-    <thead class="table-light">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Vuelo</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Tipo de Equipaje</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Pasajero</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Pasaje pasaje in Model)
-        {
+@if (Model.Count == 0)
+{
+    <div class="alert alert-danger">
+        No hay pasajes comprados
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead class="table-light">
             <tr>
-                <td>@pasaje.Id</td>
-                <td>@pasaje.Vuelo.Numero</td>
-                <td>@pasaje.Fecha.ToString("dd MMM yyyy")</td>
-                <td>@pasaje.Equipaje</td>
-                <td>$@pasaje.Precio.ToString("0.00")</td>
-                <td>@pasaje.Pasajero.Nombre</td>
+                <th scope="col">ID</th>
+                <th scope="col">Vuelo</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Tipo de Equipaje</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Pasajero</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Pasaje pasaje in Model)
+            {
+                <tr>
+                    <td>@pasaje.Id</td>
+                    <td>@pasaje.Vuelo.Numero</td>
+                    <td>@pasaje.Fecha.ToString("dd MMM yyyy")</td>
+                    <td>@pasaje.Equipaje</td>
+                    <td>$@pasaje.Precio.ToString("0.00")</td>
+                    <td>@pasaje.Pasajero.Nombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

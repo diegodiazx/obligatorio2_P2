@@ -1,12 +1,16 @@
 ﻿using Dominio;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Filters;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApp.Controllers
 {
     public class ClienteController : Controller
     {
-        Sistema _sistema = Sistema.Instancia;
+        private Sistema _sistema = Sistema.Instancia;
+
+        [Authentication]
+        [ClienteFilter]
         public IActionResult Index(string mensaje, bool exito)
         {
             List<Cliente> clientes = _sistema.OrdenarClientesPorDocumento();
@@ -15,6 +19,8 @@ namespace WebApp.Controllers
             return View(clientes);
         }
 
+        [Authentication]
+        [ClienteFilter]
         [HttpPost]
         public IActionResult Index(string correoCliente, int puntos, bool elegible)
         {
@@ -29,11 +35,15 @@ namespace WebApp.Controllers
             }
         }
 
+        [ClienteFilter]
+        [AdministradorFilter]
         public IActionResult Add()
         {
             return View();
         }
 
+        [ClienteFilter]
+        [AdministradorFilter]
         [HttpPost]
         public IActionResult Add(Ocasional cliente)
         {
@@ -41,7 +51,7 @@ namespace WebApp.Controllers
             {
                 _sistema.AgregarUsuario(cliente);
                 HttpContext.Session.SetString("correo", cliente.Correo);
-                HttpContext.Session.SetString("rol", "Cliente");
+                HttpContext.Session.SetString("rol", cliente.GetType().Name);
 
                 return RedirectToAction("Index", "Vuelo");
             }
@@ -52,11 +62,11 @@ namespace WebApp.Controllers
             }
         }
 
+        [Authentication]
+        [AdministradorFilter]
         public IActionResult Perfil()
         {
-            List<Cliente> clientes = _sistema.ObtenerListaClientes();
-            Cliente cliente = clientes[7];
-
+            Cliente cliente = _sistema.ObtenerCliente(HttpContext.Session.GetString("correo"));
             return View(cliente);
         }
     }

@@ -1,6 +1,6 @@
 @using Dominio
 
-@model IEnumerable<Vuelo>
+@model List<Vuelo>
 
 @if (!string.IsNullOrWhiteSpace(ViewBag.Mensaje))
 {
@@ -11,75 +11,82 @@
 
 <h1>Vuelos</h1>
 
-<form method="post">
-    <select name="aeroSalida">
-        <option value=""> Seleccione Salida </option>
-        @foreach(Aeropuerto aeropuerto in ViewBag.Aeropuertos)
-        {
-            <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
-        }
-    </select>
-    <select name="aeroLlegada">
-        <option value=""> Seleccione Llegada </option>
-        @foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
-        {
-            <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
-        }
-    </select>
-    <input type="submit" value="Filtrar" />
-</form>
+@if (Model.Count == 0)
+{
+    <div class="alert alert-danger">
+        No hay vuelos ingresados en el sistema
+    </div>
+}
+else
+{
+    <form method="post">
+        <select name="aeroSalida">
+            <option value=""> Seleccione Salida </option>
+            @foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
+            {
+                <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
+            }
+        </select>
+        <select name="aeroLlegada">
+            <option value=""> Seleccione Llegada </option>
+            @foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
+            {
+                <option value="@aeropuerto.Codigo">@aeropuerto.Codigo</option>
+            }
+        </select>
+        <input type="submit" value="Filtrar" />
+    </form>
 
-<table class="table">
-    <thead class="table-light">
-    <tr>
-        <th scope="col">Numero</th>
-        <th scope="col">Ruta</th>
-        <th scope="col">Avion</th>
-        <th scope="col">Frecuencia</th>
-        <!--Detalles-->
-        <th scope="col">Detalles</th>
-        <!--La parte de comprar el pasaje-->
-        <th scope="col">Comprar pasaje</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (Vuelo vuelo in Model)
-    {
-        string resultado = "";
-        foreach(DiasSemana dia in vuelo.Frecuencia)
-        {
-            resultado += dia + " ";
-        }
-        <tr>
-            <td>@vuelo.Numero</td>
-            <td>@vuelo.Ruta.ObtenerCodigoSalida() -> @vuelo.Ruta.ObtenerCodigoLlegada() </td>
-            <td>@vuelo.Avion.Modelo</td>
-            <td>@resultado</td>
+    <table class="table">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Numero</th>
+                <th scope="col">Ruta</th>
+                <th scope="col">Avion</th>
+                <th scope="col">Frecuencia</th>
+                <!--Detalles-->
+                <th scope="col">Detalles</th>
+                <!--La parte de comprar el pasaje-->
+                <th scope="col">Comprar pasaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Vuelo vuelo in Model)
+            {
+                string resultado = "";
+                foreach (DiasSemana dia in vuelo.Frecuencia)
+                {
+                    resultado += dia + " ";
+                }
+                <tr>
+                    <td>@vuelo.Numero</td>
+                    <td>@vuelo.Ruta.ObtenerCodigoSalida() -> @vuelo.Ruta.ObtenerCodigoLlegada() </td>
+                    <td>@vuelo.Avion.Modelo</td>
+                    <td>@resultado</td>
 
-            <!--Boton de detalles-->
-                <td><a href="~/Vuelo/Detalles/@vuelo.Numero" class=" btn btn-primary">Detalles</a></td>
+                    <!--Boton de detalles-->
+                    <td><a href="~/Vuelo/Detalles/@vuelo.Numero" class=" btn btn-primary">Detalles</a></td>
 
-            <!--La parte de la compra-->
-            <td>
-                <form action="~/Pasaje/Add" method="post">
-                    <!--Le quiero pasar el numero del vuelo pero que no lo vea-->
-                    <input type="hidden" value="@vuelo.Numero" name="numeroVuelo" />
-                    <!--Le quiero pasar el id (mail) del cliente pero que no lo vea-->
-                    <input type="hidden" value="@ViewBag.Pasajero" name="correoPasajero" />
-                    <!--Elegir la fecha-->
-                    <input type="date" name="fecha" required/>
-                    <!--Seleccion del equipaje, por el required parecia que lo necesitaba siempre pero 
-                    como el required no estaba en detalles me di cuenta que faltaba la validacion %-->
-                    <select name="tipoEquipaje" required>
-                        <option value="">Equipaje</option>
-                            <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
-                            <option value="@TipoEquipaje.CABINA">@TipoEquipaje.CABINA.ToString()</option>
-                            <option value="@TipoEquipaje.BODEGA">@TipoEquipaje.BODEGA.ToString()</option>
-                        </select>
-                    <input type="submit" value="Comprar" />
-                </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+                    <!--La parte de la compra-->
+                    <td>
+                        <form action="~/Pasaje/Add" method="post">
+                            <!--Le quiero pasar el numero del vuelo pero que no lo vea-->
+                            <input type="hidden" value="@vuelo.Numero" name="numeroVuelo" />
+                            <!--Elegir la fecha-->
+                            <input type="date" name="fecha" required />
+                            <!--Seleccion del equipaje, por el required parecia que lo necesitaba siempre pero
+                            como el required no estaba en detalles me di cuenta que faltaba la validacion %-->
+                            <select name="tipoEquipaje" required>
+                                <option value="">Equipaje</option>
+                                <option value="@TipoEquipaje.LIGHT">@TipoEquipaje.LIGHT.ToString()</option>
+                                <option value="@TipoEquipaje.CABINA">@TipoEquipaje.CABINA.ToString()</option>
+                                <option value="@TipoEquipaje.BODEGA">@TipoEquipaje.BODEGA.ToString()</option>
+                            </select>
+                            <input type="submit" value="Comprar" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

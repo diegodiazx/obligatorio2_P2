@@ -1,36 +1,43 @@
 using Dominio;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Filters;
 
-namespace WebApp.Controllers;
-
-public class HomeController : Controller
+namespace WebApp.Controllers
 {
-    private Sistema _sistema = Sistema.Instancia;
-    public IActionResult Index(string mensaje)
+    public class HomeController : Controller
     {
-        ViewBag.mensaje = mensaje;
-        return View();
-    }
-    
-    [HttpPost]
-    public IActionResult Index(string correo, string contra)
-    {
-        try
+        private Sistema _sistema = Sistema.Instancia;
+
+        [ClienteFilter]
+        [AdministradorFilter]
+        public IActionResult Index(string mensaje)
         {
-            Usuario logueado = _sistema.Login(correo, contra);
-            HttpContext.Session.SetString("correo", correo);
-            HttpContext.Session.SetString("rol", logueado.GetType().Name);
-            
-            //if (HttpContext.Session.GetString("rol") == "Cliente")
-            if (_sistema.ObtenerCliente(correo) != null)
-            {
-                return RedirectToAction("Index", "Vuelo");
-            }
-            return RedirectToAction("Index", "Cliente");
+            ViewBag.mensaje = mensaje;
+            return View();
         }
-        catch (Exception e)
+
+        [HttpPost]
+        public IActionResult Index(string correo, string contra)
         {
-            return RedirectToAction("Index", new { mensaje = e.Message });
+            try
+            {
+                Usuario logueado = _sistema.Login(correo, contra);
+                HttpContext.Session.SetString("correo", correo);
+                HttpContext.Session.SetString("rol", logueado.GetType().Name);
+
+                string rol = HttpContext.Session.GetString("rol");
+
+                if (rol == "Premium" || rol == "Ocasional")
+                {
+                    return RedirectToAction("Index", "Vuelo");
+                }
+
+                return RedirectToAction("Index", "Cliente");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { mensaje = e.Message });
+            }
         }
     }
 }
