@@ -1,3 +1,4 @@
+using System.Net;
 using Dominio;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Filters;
@@ -38,6 +39,15 @@ namespace WebApp.Controllers
             {
                 return RedirectToAction("Index", new { mensaje = e.Message });
             }
+        }
+
+        public IActionResult Logout()
+        {
+            //HttpContext.Session.SetString("correo", "");
+            //HttpContext.Session.SetString("rol", "");
+            //return View("Index");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - WebApp</title>
+    <title>@ViewData["Title"] - AirEuropa</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true"/>
@@ -12,36 +12,42 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AirEuropa</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <!--La lista de todos los vuelos-->
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Vuelo" asp-action="Index">Ver Vuelos</a>
-                    </li>
-                    <!--La lista de todos los pasajes-->
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pasaje" asp-action="Index">Ver Pasajes</a>
-                    </li>
-                    <!--La lista de todos los clientes-->
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Ver clientes</a>
-                    </li>
-                    <!--Registrar un cliente-->
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Add">Registrar cliente</a>
-                    </li>
-                    <!--Ver perfil-->
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Ver Perfil</a>
-                    </li>
+                    @if (!string.IsNullOrWhiteSpace(Context.Session.GetString("correo")))
+                    {
+                        if (Context.Session.GetString("rol") == "Administrador")
+                        {
+                            <!--La lista de todos los clientes-->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Ver clientes</a>
+                            </li>
+                        }
+                        <!--La lista de todos los pasajes-->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pasaje" asp-action="Index">Ver Pasajes</a>
+                        </li>
+                        if (Context.Session.GetString("rol") == "Premium" || Context.Session.GetString("rol") == "Ocasional")
+                        {
+                            <!--La lista de todos los vuelos-->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vuelo" asp-action="Index">Ver Vuelos</a>
+                            </li>
+                            <!--Ver perfil-->
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Ver Perfil</a>
+                            </li> 
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                   
                 </ul>
             </div>
         </div>
@@ -55,7 +61,7 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2025 - WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2025 - AirEuropa - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

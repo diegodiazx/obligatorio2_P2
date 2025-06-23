@@ -3,6 +3,7 @@
 @model Ocasional
 
 <h2>Registrarse</h2>
+<br/>
 
 @if (!string.IsNullOrWhiteSpace(ViewBag.Error))
 {
@@ -18,29 +19,34 @@
             <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese su correo" required>
         </div>
     </div>
+    <br/>
     <div class="form-group row">
         <label for="contra" class="col-sm-2 col-form-label">Contraseña</label>
         <div class="col-sm-10">
             <input type="password" class="form-control" id="contra" name="contra" placeholder="Ingrese su contraseña" required>
         </div>
     </div>
+    <br/>
     <div class="form-group row">
         <label for="documento" class="col-sm-2 col-form-label">Documento</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="documento" name="documento" placeholder="Ingrese su documento" required>
         </div>
     </div>
+    <br/>
     <div class="form-group row">
         <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="nombre" name="Nombre" placeholder="Ingrese su nombre" required>
         </div>
     </div>
+    <br/>
     <div class="form-group row">
         <label for="nacionalidad" class="col-sm-2 col-form-label">Nacionalidad</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" placeholder="Ingrese su nacionalidad" required>
         </div>
     </div>
+    <br/>
     <button type="submit" class="btn btn-primary">Registrarse</button>
 </form>
