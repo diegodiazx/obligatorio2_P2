@@ -17,7 +17,6 @@ namespace WebApp.Controllers
             return View(pasajes);
         }
 
-        [AdministradorFilter]
         [HttpPost]
         public IActionResult Add(string numeroVuelo, DateTime fecha, TipoEquipaje tipoEquipaje,
             string origen)

@@ -85,6 +85,7 @@ namespace Dominio
             return null;
             //Tener la excepcion ahi hace que al intentar acceder al Index de Pasaje sin estar logueado, 
             //muestra esta excepcion en lugar del mensaje del filtro
+            
             //throw new Exception("No existe un usuario con ese correo");
         }
 
@@ -141,6 +142,7 @@ namespace Dominio
             return null;
             //Tener la excepcion ahi hace que al intentar acceder al Perfil de Cliente sin estar logueado, 
             //muestra esta excepcion en lugar del mensaje del filtro
+            
             //throw new Exception("No existe ningun usuario con ese numero.");
         }
 

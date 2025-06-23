@@ -42,8 +42,6 @@ namespace WebApp.Controllers
             return View();
         }
 
-        [ClienteFilter]
-        [AdministradorFilter]
         [HttpPost]
         public IActionResult Add(Ocasional cliente)
         {
