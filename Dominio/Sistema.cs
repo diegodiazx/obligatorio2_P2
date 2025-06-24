@@ -85,7 +85,6 @@ namespace Dominio
             return null;
             //Tener la excepcion ahi hace que al intentar acceder al Index de Pasaje sin estar logueado, 
             //muestra esta excepcion en lugar del mensaje del filtro
-            
             //throw new Exception("No existe un usuario con ese correo");
         }
 
@@ -263,56 +262,42 @@ namespace Dominio
         
         public void ExisteUsuario(Usuario otro) 
         {
-            foreach (Usuario usuario in this._usuarios)
+            if (_usuarios.Contains(otro))
             {
-                if (usuario.Equals(otro)) 
-                {
-                    throw new Exception("Ya existe un usuario con ese correo.");
-                }
+                throw new Exception("Ya existe un usuario con ese correo.");
             }
         }
 
         public void ExisteAvion(Avion otro)
         {
-            foreach (Avion avion in this._aviones)
+            if (_aviones.Contains(otro))
             {
-                if (avion.Equals(otro))
-                {
-                    throw new Exception("Ya existe ese modelo de avion.");
-                }
+                throw new Exception("Ya existe ese modelo de avion.");
             }
         }
         
         public void ExisteVuelo(Vuelo otro)
         {
-            foreach (Vuelo vuelo in this._vuelos)
+            if (_vuelos.Contains(otro))
             {
-                if (vuelo.Equals(otro))
-                {
-                    throw new Exception("Ya existe un vuelo con ese codigo.");
-                }
+                throw new Exception("Ya existe un vuelo con ese codigo.");
             }
         }
         
         public void ExisteAeropuerto(Aeropuerto otro)
         {
-            foreach (Aeropuerto aeropuerto in this._aeropuertos)
+            if (_aeropuertos.Contains(otro))
             {
-                if (aeropuerto.Equals(otro))
-                {
-                    throw new Exception("Ya existe un aeropuerto con ese codigo.");
-                }
+                throw new Exception("Ya existe un aeropuerto con ese codigo");
             }
         }
         
         public void ExisteRuta(Ruta otro)
         {
-            foreach (Ruta ruta in this._rutas)
+            if (_rutas.Contains(otro))
             {
-                if (ruta.Equals(otro))
-                {
-                    throw new Exception("Ya existe una ruta con ese recorrido (Aeropuertos de salida y llegada).");
-                }
+                throw new Exception("Ya existe una ruta con ese recorrido (Aeropuertos de salida y llegada).");
+
             }
         }
 
